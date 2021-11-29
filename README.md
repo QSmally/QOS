@@ -1,7 +1,7 @@
 
 # QOS
 
-> A single-core, multi-context operating system with a monolythic kernel.
+> A single-core, multi-context operating system with a monolithic kernel.
 
 ## Build
 
