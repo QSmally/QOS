@@ -17,7 +17,7 @@ PLD @port.context_store
 RST 1
 
 CPL
-@MMUARG
+@MMUPAR
 CPL
-@MMUARG
+@MMUPAR
 @MMU @mmu.intermediate_load
