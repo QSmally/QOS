@@ -6,5 +6,5 @@
 .main:
     @CALL kernel.swap
     PPL
-    @MMUPAR
+    PST @port.mmu
     @MMU @mmu.intermediate_load
