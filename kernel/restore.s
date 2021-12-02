@@ -16,6 +16,7 @@ RST 2
 PLD @port.context_store
 RST 1
 
+// Exits kernel mode and jumps back to application space.
 CPL
 PST @port.mmu
 CPL

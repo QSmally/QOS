@@ -1,4 +1,5 @@
 @PAGE 0 0
+@ADDRESSABLE kernel.boot
 
 // The first thing QCPU sees when booting up.
 
