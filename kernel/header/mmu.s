@@ -4,6 +4,8 @@
 // associated to the management unit, and it clears the input stack when doing
 // that.
 
+// Addressing must have the high byte inputted first, followed by the low byte.
+
 IMM 0
 @instruction
 PLD @port.mmu
