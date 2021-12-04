@@ -17,4 +17,4 @@ PLD @port.context_store
 RST 1
 @MMUDYNAMICARG CPL
 @MMUDYNAMICARG CPL
-@MMU @mmu.intermediate_load
+@MMU @mmu.exit_intermediate_load
