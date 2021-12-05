@@ -41,9 +41,7 @@
     POI @new_pid_index
     MST 1
 .return:
-    AST @current_proc_mask
-    PST @port.mmu
+    @MMUDYNAMICARG AST @current_proc_mask
     @MMU @mmu.context_snapshot
-    AST @target_segment
-    PST @port.mmu
+    @MMUDYNAMICARG AST @target_segment
     @MMU @mmu.exit_intermediate_load
