@@ -6,6 +6,4 @@
 
 // Addressing must have the high byte inputted first, followed by the low byte.
 
-IMM 0
-@instruction
-PLD @port.mmu
+CPN @instruction
