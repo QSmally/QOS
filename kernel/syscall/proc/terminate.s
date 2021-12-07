@@ -16,5 +16,5 @@
     MLD .kernel.proc.count!
     INC 0
     MST .kernel.proc.count!
-.continue:
+; continue
     @GOTO kernel.func.swap_point
