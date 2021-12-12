@@ -1,4 +1,4 @@
-@PAGE 0 3
+@PAGE 0 4
 @ADDRESSABLE kernel.str
 
 @DECLARE nil_byte 0x00
