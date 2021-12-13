@@ -15,8 +15,7 @@
     CND #!zero
     JMP .print_char
 ; start os
-    @MMUSTATICARG .os.main+
-    @MMUSTATICARG .os.main-
+    @MMU16LABEL os.main
     @MMU @mmu.exit_intermediate_load
 .print_char:
     PST @port.io

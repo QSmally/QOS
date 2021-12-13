@@ -57,6 +57,5 @@
     @MMUDYNAMICARG AST @target_segment
     @MMU @mmu.exit_intermediate_load
 .overflow_panic:
-    @MMUSTATICARG .kernel.panic+
-    @MMUSTATICARG .kernel.panic-
+    @MMU16LABEL kernel.panic
     @MMU @mmu.exit_intermediate_load
