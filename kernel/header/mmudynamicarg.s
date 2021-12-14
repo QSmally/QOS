@@ -4,4 +4,4 @@
 
 .break_label:
     @*instruction
-    PST @port.mmu
+    MDA
