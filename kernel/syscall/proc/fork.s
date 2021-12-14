@@ -23,12 +23,14 @@
     @BYTE @new_proc_index 0
     @BYTE @stride_loc @stride
 ; maximum process panic
-    @BYTE @max_proc_count 15
+    @BYTE @max_proc_count 16
     MLD .kernel.proc.count!
     SUB @max_proc_count
-    CND #zero
-    JMP .overflow_panic
     CND #!zero
+    JMP .find_empty_iteration
+; panic if overflow
+    @MMU16LABEL kernel.panic
+    @MMU @mmu.exit_intermediate_load
 .find_empty_iteration:
     AST @new_proc_index
     ADD @stride_loc
@@ -57,7 +59,4 @@
     @MMUDYNAMICARG AST @current_proc_index
     @MMU @mmu.context_snapshot
     @MMUDYNAMICARG AST @target_segment
-    @MMU @mmu.exit_intermediate_load
-.overflow_panic:
-    @MMU16LABEL kernel.panic
     @MMU @mmu.exit_intermediate_load
