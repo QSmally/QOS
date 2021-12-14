@@ -11,11 +11,11 @@
 .main:
     MLD .kernel.proc.current!
     RST @proc_iterator_index
+    CND #zero
+.find_nonempty_iteration:
     @BYTE 0 @max_index
     SUB @proc_iterator_index
-    CND #zero
     JMP .loop_back
-.find_nonempty_iteration:
     @BYTE 0 @stride
     ADD @proc_iterator_index
     RST @proc_iterator_index

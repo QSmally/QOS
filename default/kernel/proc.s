@@ -9,7 +9,10 @@
 //   8-15: segment address
 
 .&kernel.proc.current:
-    0x00
+    0x02
 .&kernel.proc.count:
     0x00
-%array 30
+.&kernel.proc.table:
+    0xFF
+    .os.main+
+    %array 28

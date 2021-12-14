@@ -8,9 +8,11 @@
 
 .main:
     MLD .kernel.proc.current!
-    POI 0
+    RST @current_proc_index
+    @BYTE 0 0
+    POI @current_proc_index
     MST 0
-    POI 0
+    POI @current_proc_index
     MST 1
 ; decrement process count
     MLD .kernel.proc.count!
