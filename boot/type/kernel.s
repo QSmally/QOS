@@ -5,6 +5,9 @@
     @DECLARE allocate_page 3
     @DECLARE allocate 4
     @DECLARE drop 5
-    @DECLARE call 6
-    @DECLARE return 7
+    @DECLARE data_store 6
+    @DECLARE data_load 7
+    @DECLARE segment_load 8
+    @DECLARE call 9
+    @DECLARE return 10
 @END
