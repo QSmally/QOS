@@ -6,7 +6,10 @@
 // kernel call should be called with the requestable header, as its context and
 // application address will be stored as a snapshot.
 
+// Type: returnable
 // Arguments: process target segment address
+// Returns: empty tuple
+
 // TODO: filesystem permissions
 
 @DECLARE current_proc_index 1

@@ -4,6 +4,10 @@
 // Terminates the process which is currently active. It must be called with the
 // unaddressed syscall header.
 
+// Type: non-returnable
+// Arguments: empty tuple
+// Returns: empty tuple
+
 @DECLARE current_proc_index 1
 
 .main:

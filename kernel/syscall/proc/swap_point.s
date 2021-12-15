@@ -3,6 +3,10 @@
 
 // Switches contexts to another process.
 
+// Type: returnable
+// Arguments: empty tuple
+// Returns: empty tuple
+
 @DECLARE proc_iterator_index 1
 
 @DECLARE max_index 30
