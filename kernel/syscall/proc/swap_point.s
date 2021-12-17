@@ -37,9 +37,8 @@
     @MMU @mmu.context_restore
     MST .kernel.proc.current!
 .continue:
-    @MMUDYNAMICARG CPL
-    @MMUDYNAMICARG CPL
-    @MMU @mmu.exit_intermediate_load
+    @MMU16LABEL kernel.restore
+    @MMU @mmu.intermediate_load
 .loop_back:
     @BYTE @proc_iterator_index 0
     JMP .find_nonempty_iteration
