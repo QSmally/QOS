@@ -7,7 +7,7 @@
 
 .main:
     DLS
-    .kernel.str-
+    .kernel.str*
     @BYTE @string_iterator .kernel.str.qos
 .load_char:
     POI @string_iterator
