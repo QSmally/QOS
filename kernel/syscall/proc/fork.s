@@ -25,12 +25,12 @@
     RST @current_proc_index
     @BYTE @new_proc_index 0
     @BYTE @stride_loc @stride
-    CND #!zero
 ; maximum process panic
     @IF !performance-unsafe
         @BYTE @max_proc_count 16
         MLD .kernel.proc.count!
         SUB @max_proc_count
+        @DROPTHROUGH CND #!zero
         JMP .find_empty_iteration
     ; panic if overflow
         @MMU16LABEL kernel.panic
