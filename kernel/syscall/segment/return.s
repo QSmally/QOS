@@ -8,7 +8,7 @@
 // Returns: empty tuple
 
 .main:
-    @MMUDYNAMICARG MLD .kernel.proc.current!
+    @MMUDYNAMICARG @MMU @mmu.pid_load
     @MMU @mmu.context_restore
 ; branch to segment
     @MMU16LABEL kernel.restore

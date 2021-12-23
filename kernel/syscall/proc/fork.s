@@ -21,7 +21,9 @@
 @DECLARE stride 2
 
 .main:
-    MLD .kernel.proc.current!
+    @MMU16LABEL kernel.proc
+    @MMU @mmu.data_load
+    @MMU @mmu.pid_load
     RST @current_proc_index
     @BYTE @new_proc_index 0
     @BYTE @stride_loc @stride
@@ -48,7 +50,7 @@
     POI @new_proc_index
     MST 0
     AST @new_proc_index
-    MST .kernel.proc.current!
+    @MMU @mmu.pid_register
 ; insert application segment address
     PPL
     RST @target_segment

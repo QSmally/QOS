@@ -8,11 +8,8 @@
 //   4-7:  parent id
 //   8-15: segment address
 
-.&kernel.proc.current:
-    0x02
 .&kernel.proc.count:
-    0x00
+    0x01
+    .os.main-
 .&kernel.proc.table:
-    0xFF
-    .os.main+
-    %array 28
+    %array 30

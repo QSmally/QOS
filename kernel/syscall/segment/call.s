@@ -11,7 +11,7 @@
 // TODO: filesystem permissions
 
 .main:
-    @MMUDYNAMICARG MLD .kernel.proc.current!
+    @MMUDYNAMICARG @MMU @mmu.pid_load
     @MMU @mmu.context_snapshot
 ; branch to segment
     @MMUDYNAMICARG PPL

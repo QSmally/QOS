@@ -6,11 +6,6 @@
 @DECLARE call_id 1
 
 .main:
-; temporarily always load the 'proc' data block to retrieve the current PID, will
-; probably be automatcially loaded on privilege swaps in the future.
-    @MMU16LABEL kernel.proc
-    @MMU @mmu.data_load
-; the LSB indicates no context store
     PPL
     RSH 0
     RST @call_id

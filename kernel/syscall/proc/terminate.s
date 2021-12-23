@@ -11,7 +11,9 @@
 @DECLARE current_proc_index 1
 
 .main:
-    MLD .kernel.proc.current!
+    @MMU16LABEL kernel.proc
+    @MMU @mmu.data_load
+    @MMU @mmu.pid_load
     RST @current_proc_index
     @BYTE 0 0
     POI @current_proc_index

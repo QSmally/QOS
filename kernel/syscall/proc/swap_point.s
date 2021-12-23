@@ -13,7 +13,9 @@
 @DECLARE stride 2
 
 .main:
-    MLD .kernel.proc.current!
+    @MMU16LABEL kernel.proc
+    @MMU @mmu.data_load
+    @MMU @mmu.pid_load
     RST @proc_iterator_index
     CND #zero
 .find_nonempty_iteration:
@@ -27,15 +29,15 @@
     MLD 0
     JMP .find_nonempty_iteration
 ; ignore swap if same context
-    MLD .kernel.proc.current!
+    @MMU @mmu.pid_load
     SUB @proc_iterator_index
     JMP .continue
 .swap_context:
-    @MMUDYNAMICARG MLD .kernel.proc.current!
+    @MMUDYNAMICARG @MMU @mmu.pid_load
     @MMU @mmu.context_snapshot
     @MMUDYNAMICARG AST @proc_iterator_index
     @MMU @mmu.context_restore
-    MST .kernel.proc.current!
+    @MMU @mmu.pid_register
 .continue:
     @MMU16LABEL kernel.restore
     @MMU @mmu.intermediate_load
