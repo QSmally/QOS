@@ -63,7 +63,5 @@
 ; swap to new context
     @MMU16LABEL kernel.proc
     @MMU @mmu.data_store
-    @MMUDYNAMICARG AST @current_proc_index
-    @MMU @mmu.context_snapshot
     @MMUDYNAMICARG AST @target_segment
     @MMU @mmu.exit_intermediate_load

@@ -33,10 +33,7 @@
     SUB @proc_iterator_index
     JMP .continue
 .swap_context:
-    @MMUDYNAMICARG @MMU @mmu.pid_load
-    @MMU @mmu.context_snapshot
-    @MMUDYNAMICARG AST @proc_iterator_index
-    @MMU @mmu.context_restore
+    AST @proc_iterator_index
     @MMU @mmu.pid_register
 .continue:
     @MMU16LABEL kernel.restore

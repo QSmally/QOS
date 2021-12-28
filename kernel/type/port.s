@@ -1,4 +1,3 @@
 @ENUM port
-    @DECLARE context_store 0
-    @DECLARE io 1
+    @DECLARE io 0
 @END

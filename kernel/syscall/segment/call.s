@@ -11,9 +11,6 @@
 // TODO: filesystem permissions
 
 .main:
-    @MMUDYNAMICARG @MMU @mmu.pid_load
-    @MMU @mmu.context_snapshot
-; branch to segment
     @MMUDYNAMICARG PPL
     @MMUDYNAMICARG PPL
     @MMU @mmu.exit_intermediate_load
