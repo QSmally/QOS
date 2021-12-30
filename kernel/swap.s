@@ -1,6 +1,11 @@
 @PAGE 1 1
 @ADDRESSABLE kernel.swap
 
+@MAKEPAGE context_store_0 1 4
+@MAKEPAGE context_store_1 1 5
+@MAKEPAGE context_store_2 1 6
+@MAKEPAGE context_store_3 1 7
+
 // An internal callable which pushes the CPU registers onto the context stack, in
 // ascending order. It's required to pull them in reversed order out of the stack.
 
