@@ -6,8 +6,13 @@
 @MAKEPAGE context_store_2 1 6
 @MAKEPAGE context_store_3 1 7
 
-// An internal callable which pushes the CPU registers onto the context stack, in
-// ascending order. It's required to pull them in reversed order out of the stack.
+// An internal callable which pushes the CPU registers onto the context store. The
+// block of memory is determined by the process id: the lower two bits being the
+// page, and upper two bits (shifted to the left) is the write head.
+
+// Type: returnable (1 byte)
+// Arguments: empty tuple
+// Returns: empty tuple
 
 @DECLARE pid 1
 @DECLARE base_location 1

@@ -1,6 +1,13 @@
 @PAGE 1 2
 @ADDRESSABLE kernel.restore
 
+// Moves back the captured context to registers and immediately branches to the two
+// bytes popped from the call stack.
+
+// Type: non-returnable
+// Arguments: empty tuple
+// Returns: never
+
 @DECLARE pid 1
 @DECLARE base_location 1
 
