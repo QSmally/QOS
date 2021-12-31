@@ -1,5 +1,4 @@
 @PAGE 2 4
-@ADDRESSABLE kernel.func.call
 
 // Calls to subroutine on another segment and requires the permission to be granted
 // by that node.

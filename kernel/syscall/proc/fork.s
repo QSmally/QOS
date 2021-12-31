@@ -1,5 +1,4 @@
 @PAGE 2 0
-@ADDRESSABLE kernel.func.fork
 @OVERFLOWABLE
 
 // Spawns a new process and immediately starts executing the zero-page of it. This

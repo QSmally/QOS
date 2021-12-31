@@ -1,5 +1,5 @@
 @PAGE 2 3
-@ADDRESSABLE kernel.func.swap_point
+@ADDRESSABLE kernel.calls.swap_point
 
 // Switches contexts to another process.
 

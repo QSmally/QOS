@@ -1,5 +1,4 @@
 @PAGE 2 2
-@ADDRESSABLE kernel.func.terminate
 
 // Terminates the process which is currently active. It must be called with the
 // unaddressed syscall header.
@@ -25,4 +24,4 @@
     INC 0
     MST .kernel.proc.count!
 ; continue
-    @GOTO kernel.func.swap_point
+    @GOTO kernel.calls.swap_point

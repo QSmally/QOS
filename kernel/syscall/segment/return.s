@@ -1,5 +1,4 @@
 @PAGE 2 5
-@ADDRESSABLE kernel.func.return
 
 // Restores and returns from the most recent privileged subroutine.
 
