@@ -12,19 +12,7 @@
 @DECLARE base_location 1
 
 .main:
-    @MMU @mmu.pid_load
-    RST @pid
-    @BYTE 0 0x03
-    AND @pid
-    POI 0
-    DLS
-    4
-; calculate start position
-    @BYTE 0 0x0C
-    AND @pid
-    RST @base_location
-    ADD @base_location
-    RST @base_location
+    @CALL kernel.context_store
 ; swap
     POI @base_location
     MLD 7
@@ -47,6 +35,8 @@
     POI @base_location
     MLD 1
     RST 1
+; discard stack layer
+    PPL
 ; return
     @MMUDYNAMICARG CPL
     @MMUDYNAMICARG CPL

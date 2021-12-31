@@ -20,21 +20,7 @@
 .main:
     POI 1
     CPS
-; load page
-    @MMU @mmu.pid_load
-    RST @pid
-    @BYTE 0 0x03
-    AND @pid
-    PPS
-    POI 0
-    DLS
-    4
-; calculate start position
-    @BYTE 0 0x0C
-    AND @pid
-    RST @base_location
-    ADD @base_location
-    RST @base_location
+    @CALL kernel.context_store
 ; swap
     POI @base_location
     CPL
@@ -62,4 +48,5 @@
     POI 0
     DSS
     4
+; return
     @RETURN
