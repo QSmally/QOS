@@ -3,6 +3,11 @@
 
 // If any catastrophic event happens, burn!
 
-.main:
+.call_trace:
+    CND #!zero
+    CPL
+    PST @port.io
+    JMP .call_trace
     CND #true
-    JMP .main
+.spin_lock:
+    JMP .spin_lock
