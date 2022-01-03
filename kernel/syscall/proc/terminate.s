@@ -10,18 +10,16 @@
 @DECLARE current_proc_index 1
 
 .main:
-    @MMU16LABEL kernel.proc
-    @MMU @mmu.data_load
+    @MMUSTATICARG .kernel.proc+
+    @MMU @mmu.kernel_data_target
     @MMU @mmu.pid_load
     RST @current_proc_index
-    @BYTE 0 0
-    POI @current_proc_index
-    MST 0
-    POI @current_proc_index
-    MST 1
+    IMM 0, 0
+    MST @current_proc_index, 0
+    MST @current_proc_index, 1
 ; decrement process count
-    MLD .kernel.proc.count!
+    MLD 0, .kernel.proc.count!-
     INC 0
-    MST .kernel.proc.count!
+    MST 0, .kernel.proc.count!-
 ; continue
     @GOTO kernel.calls.swap_point

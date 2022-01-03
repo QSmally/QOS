@@ -6,19 +6,15 @@
 @DECLARE string_iterator 1
 
 .main:
-    DLS
-    .kernel.str*
-    @BYTE @string_iterator .kernel.str.qos
-.load_char:
-    POI @string_iterator
-    MLD 0
+    IMM @string_iterator, .kernel.str.qos-
     CND #!zero
-    JMP .print_char
+.load_char:
+    MLD @string_iterator, 0
+    BRH 0, .print_char-
 ; start os
     @MMU16LABEL os.main
     @MMU @mmu.exit_intermediate_load
 .print_char:
     PST @port.io
     INC @string_iterator
-    CND #true
-    JMP .load_char
+    JMP 0, .load_char-

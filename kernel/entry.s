@@ -6,9 +6,9 @@
 .main:
     PPL
     RSH 0
-    PPS
+    PPS 7
     CND #underflow
-    JMP .syscall
+    BRH 0, .syscall-
     @CALL kernel.swap
 .syscall:
     @MMUDYNAMICARG PPL

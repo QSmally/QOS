@@ -6,8 +6,6 @@
 
 @DECLARE return_label %random
 
-CPS
-.@return_label-
-SPL
-.@subroutine_label-
+CPS 0, .@return_label-
+JMP 0, .@subroutine_label-
 .@return_label:

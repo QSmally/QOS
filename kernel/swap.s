@@ -14,39 +14,27 @@
 // Arguments: empty tuple
 // Returns: empty tuple
 
-@DECLARE pid 1
 @DECLARE base_location 1
 
 .main:
-    POI 1
-    CPS
-    @CALL kernel.context_store
+    CPS 1
+    @MMU @mmu.pid_load
+    BSL 3
+    RST @base_location
 ; swap
-    POI @base_location
     CPL
-    MST 1
-    POI @base_location
+    MST @base_location, 0x81
     AST 2
-    MST 2
-    POI @base_location
+    MST @base_location, 0x82
     AST 3
-    MST 3
-    POI @base_location
+    MST @base_location, 0x83
     AST 4
-    MST 4
-    POI @base_location
+    MST @base_location, 0x84
     AST 5
-    MST 5
-    POI @base_location
+    MST @base_location, 0x85
     AST 6
-    MST 6
-    POI @base_location
+    MST @base_location, 0x86
     AST 7
-    MST 7
-; store page
-    PPL
-    POI 0
-    DSS
-    4
+    MST @base_location, 0x87
 ; return
     @RETURN

@@ -2,5 +2,4 @@
 
 // Jumps to a page inside of the scoped program segment.
 
-SPL
-.@label-
+JMP 0, .@label-

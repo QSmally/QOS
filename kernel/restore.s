@@ -8,35 +8,27 @@
 // Arguments: empty tuple
 // Returns: never
 
-@DECLARE pid 1
 @DECLARE base_location 1
 
 .main:
-    @CALL kernel.context_store
+    @MMU @mmu.pid_load
+    BSL 3
+    RST @base_location
 ; swap
-    POI @base_location
-    MLD 7
+    MLD @base_location, 0x87
     RST 7
-    POI @base_location
-    MLD 6
+    MLD @base_location, 0x86
     RST 6
-    POI @base_location
-    MLD 5
+    MLD @base_location, 0x85
     RST 5
-    POI @base_location
-    MLD 4
+    MLD @base_location, 0x84
     RST 4
-    POI @base_location
-    MLD 3
+    MLD @base_location, 0x83
     RST 3
-    POI @base_location
-    MLD 2
+    MLD @base_location, 0x82
     RST 2
-    POI @base_location
-    MLD 1
+    MLD @base_location, 0x81
     RST 1
-; discard stack layer
-    PPL
 ; return
     @MMUDYNAMICARG CPL
     @MMUDYNAMICARG CPL

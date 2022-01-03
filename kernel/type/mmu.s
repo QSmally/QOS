@@ -1,6 +1,6 @@
 @ENUM mmu
-    @DECLARE data_store 0
-    @DECLARE data_load 1
+    @DECLARE data_target 0
+    @DECLARE kernel_data_target 1
     @DECLARE intermediate_load 2
     @DECLARE kernel_intermediate_load 3
     @DECLARE exit_intermediate_load 4

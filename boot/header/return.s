@@ -4,5 +4,4 @@
 // same segment scope.
 
 CPL
-POI 0
-SPL
+JMP 7, 0

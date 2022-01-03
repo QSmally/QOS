@@ -20,19 +20,19 @@
 @DECLARE stride 2
 
 .main:
-    @MMU16LABEL kernel.proc
-    @MMU @mmu.data_load
+    @MMUSTATICARG .kernel.proc+
+    @MMU @mmu.kernel_data_target
     @MMU @mmu.pid_load
     RST @current_proc_index
-    @BYTE @new_proc_index 0
-    @BYTE @stride_loc @stride
+    IMM @new_proc_index, 0
+    IMM @stride_loc, @stride
 ; maximum process panic
     @IF !performance-unsafe
-        @BYTE @max_proc_count 16
-        MLD .kernel.proc.count!
+        IMM @max_proc_count, 16
+        MLD 0, .kernel.proc.count!-
         SUB @max_proc_count
         @DROPTHROUGH CND #!zero
-        JMP .find_empty_iteration
+        BRH 0, .find_empty_iteration-
     ; panic if overflow
         @MMU16LABEL kernel.panic
         @MMU @mmu.exit_intermediate_load
@@ -41,26 +41,21 @@
     AST @new_proc_index
     ADD @stride_loc
     RST @new_proc_index
-    POI @new_proc_index
-    MLD 0
-    JMP .find_empty_iteration
+    MLD @new_proc_index, 0
+    BRH 0, .find_empty_iteration
 ; insert parent pid
     AST @current_proc_index
-    POI @new_proc_index
-    MST 0
+    MST @new_proc_index, 0
     AST @new_proc_index
     @MMU @mmu.pid_register
 ; insert application segment address
     PPL
     RST @target_segment
-    POI @new_proc_index
-    MST 1
+    MST @new_proc_index, 1
 ; increment process count
-    MLD .kernel.proc.count!
+    MLD 0, .kernel.proc.count!-
     INC 0
-    MST .kernel.proc.count!
+    MST 0, .kernel.proc.count!-
 ; swap to new context
-    @MMU16LABEL kernel.proc
-    @MMU @mmu.data_store
     @MMUDYNAMICARG AST @target_segment
     @MMU @mmu.exit_intermediate_load

@@ -2,5 +2,4 @@
 @ADDRESSABLE os.main
 
 .main:
-    CND #true
-    JMP .main
+    JMP 0, .main
