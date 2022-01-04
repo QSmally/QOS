@@ -8,6 +8,6 @@
 .call_trace:
     CPL
     PST @port.io
-    BRH 0, .call_trace-
+    BRH 0, .call_trace
 .spin_lock:
-    JMP 0, .spin_lock-
+    JMP 0, .spin_lock

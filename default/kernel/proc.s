@@ -10,6 +10,6 @@
 
 .&kernel.proc.count:
     0x01
-    .os.main-
+    .os.main
 .&kernel.proc.table:
     %array 30

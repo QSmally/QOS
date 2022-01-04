@@ -29,10 +29,10 @@
 ; maximum process panic
     @IF !performance-unsafe
         IMM @max_proc_count, 16
-        MLD 0, .kernel.proc.count!-
+        MLD 0, .kernel.proc.count!
         SUB @max_proc_count
         @DROPTHROUGH CND #!zero
-        BRH 0, .find_empty_iteration-
+        BRH 0, .find_empty_iteration
     ; panic if overflow
         @MMU16LABEL kernel.panic
         @MMU @mmu.exit_intermediate_load
@@ -53,9 +53,9 @@
     RST @target_segment
     MST @new_proc_index, 1
 ; increment process count
-    MLD 0, .kernel.proc.count!-
+    MLD 0, .kernel.proc.count!
     INC 0
-    MST 0, .kernel.proc.count!-
+    MST 0, .kernel.proc.count!
 ; swap to new context
     @MMUDYNAMICARG AST @target_segment
     @MMU @mmu.exit_intermediate_load

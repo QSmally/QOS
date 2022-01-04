@@ -21,16 +21,16 @@
 .find_nonempty_iteration:
     IMM 0, @max_index
     SUB @proc_iterator_index
-    JMP 0, .loop_back-
+    JMP 0, .loop_back
     IMM 0, @stride
     ADD @proc_iterator_index
     RST @proc_iterator_index
     MLD @proc_iterator_index, 0
-    BRH 0, .find_nonempty_iteration-
+    BRH 0, .find_nonempty_iteration
 ; ignore swap if same context
     @MMU @mmu.pid_load
     SUB @proc_iterator_index
-    BRH 0, .continue-
+    BRH 0, .continue
 ; swap context
     AST @proc_iterator_index
     @MMU @mmu.pid_register
