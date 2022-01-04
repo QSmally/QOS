@@ -41,17 +41,17 @@
     AST @new_proc_index
     ADD @stride_loc
     RST @new_proc_index
-    MLD @new_proc_index, 0
+    MLD @new_proc_index, .kernel.proc
     BRH 0, .find_empty_iteration
 ; insert parent pid
     AST @current_proc_index
-    MST @new_proc_index, 0
+    MST @new_proc_index, .kernel.proc
     AST @new_proc_index
     @MMU @mmu.pid_register
 ; insert application segment address
     PPL
     RST @target_segment
-    MST @new_proc_index, 1
+    MST @new_proc_index, 0x41 ; todo: add OR syntax
 ; increment process count
     MLD 0, .kernel.proc.count!
     INC 0
