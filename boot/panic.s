@@ -7,7 +7,7 @@
     CND #!zero
 .call_trace:
     CPL
-    PST @port.io
+    PST 0, @port.io
     BRH 0, .call_trace
 .spin_lock:
     JMP 0, .spin_lock

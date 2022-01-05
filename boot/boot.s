@@ -15,6 +15,6 @@
     @MMU16LABEL os.main
     @MMU @mmu.exit_intermediate_load
 .print_char:
-    PST @port.io
+    PST 0, @port.io
     INC @string_iterator
     JMP 0, .load_char

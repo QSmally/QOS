@@ -17,7 +17,7 @@
     AST @amount
     BRH 0, .return
     PPL
-    PST @port.io
+    PST 0, @port.io
     DEC @amount
     JMP 0, .print_loop
 .return:
