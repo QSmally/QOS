@@ -10,4 +10,5 @@
     @DECLARE segment_load 8
     @DECLARE call 9
     @DECLARE return 10
+    @DECLARE intreturn 11
 @END
