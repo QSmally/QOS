@@ -1,4 +1,4 @@
-@PAGE 2 2
+@PAGE 2 1
 
 // Terminates the process which is currently active. It must be called with the
 // unaddressed syscall header.

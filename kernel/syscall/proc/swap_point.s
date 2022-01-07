@@ -1,4 +1,4 @@
-@PAGE 2 3
+@PAGE 2 2
 @ADDRESSABLE kernel.calls.swap_point
 
 // Switches contexts to another process.

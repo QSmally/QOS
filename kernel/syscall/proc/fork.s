@@ -1,5 +1,4 @@
 @PAGE 2 0
-@OVERFLOWABLE
 
 // Spawns a new process and immediately starts executing the zero-page of it. This
 // kernel call should be called with the requestable header, as its context and

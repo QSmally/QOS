@@ -1,4 +1,4 @@
-@PAGE 2 5
+@PAGE 2 4
 
 // Restores and returns from the most recent privileged subroutine.
 

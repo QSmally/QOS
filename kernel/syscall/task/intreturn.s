@@ -1,4 +1,4 @@
-@PAGE 2 6
+@PAGE 2 5
 
 // Acknowledges and returns from the interrupt service routine and swaps to another
 // context.
