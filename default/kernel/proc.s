@@ -1,15 +1,16 @@
 @PAGE 0 2
 @ADDRESSABLE kernel.proc
 
-// 0:   current process context
-// 1:   process count
-// ...: two byte entities
-//   0-3:  masking bits
-//   4-7:  parent id
-//   8-15: segment address
+// Two byte stride
+// a.bb.ccccc
+// dddddddd
 
-.&kernel.proc.count:
+// a: has execution loop
+// b: priority index
+// c: process index
+
+.&kernel.proc.main:
     0x01
-    .os.main
-.&kernel.proc.table:
+    .os.main+
+.&kernel.proc.others:
     %array 30
