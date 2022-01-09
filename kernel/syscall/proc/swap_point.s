@@ -21,7 +21,7 @@
 .find_nonempty_iteration:
     IMM 0, @max_index
     SUB @proc_iterator_index
-    JMP 0, .loop_back
+    BRH 0, .loop_back
     IMM 0, @stride
     ADD @proc_iterator_index
     RST @proc_iterator_index

@@ -5,7 +5,7 @@
 // application address will be stored as a snapshot.
 
 // Type: returnable
-// Arguments: process target segment address
+// Arguments: segment address
 // Returns: empty tuple
 
 // TODO: filesystem permissions
@@ -28,7 +28,7 @@
 ; maximum process panic
     @IF !performance-unsafe
         IMM @max_proc_count, 16
-        MLD 0, .kernel.proc.count!
+        MLD 0, .kernel.proc.main!
         SUB @max_proc_count
         @DROPTHROUGH CND #!zero
         BRH 0, .find_empty_iteration
@@ -52,9 +52,9 @@
     RST @target_segment
     MST @new_proc_index, 0x41 ; todo: add OR syntax
 ; increment process count
-    MLD 0, .kernel.proc.count!
+    MLD 0, .kernel.proc.main!
     INC 0
-    MST 0, .kernel.proc.count!
+    MST 0, .kernel.proc.main!
 ; swap to new context
     @MMUDYNAMICARG AST @target_segment
     @MMU @mmu.exit_intermediate_load

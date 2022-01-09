@@ -18,8 +18,8 @@
     MST @current_proc_index, 0
     MST @current_proc_index, 1
 ; decrement process count
-    MLD 0, .kernel.proc.count!
-    INC 0
-    MST 0, .kernel.proc.count!
+    MLD 0, .kernel.proc.main!
+    DEC 0
+    MST 0, .kernel.proc.main!
 ; continue
     @GOTO kernel.calls.swap_point
