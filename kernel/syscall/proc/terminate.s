@@ -13,7 +13,7 @@
     @MMUSTATICARG .kernel.proc+
     @MMU @mmu.kernel_data_target
     @MMU @mmu.pid_load
-    BRL 1
+    BSL 1
     RST @current_proc_index
     IMM 0, 0
     MST @current_proc_index, 0x40

@@ -54,7 +54,7 @@
 ; continue
     @MMUDYNAMICARG AST @new_proc_index
     @MMU @mmu.exit_intermediate_load
-@IF performance-unsafe
+@IF !performance-unsafe
     .overflow_panic:
         @MMU16LABEL kernel.panic
         @MMU @mmu.exit_intermediate_load
