@@ -37,11 +37,12 @@
     SUB @task_priority
     BRH 0, .empty_iteration
 ; increment task age
-    IMM 0, 0b01000000
+    IMM 0, 0x40
     ADD @task
     MST @iterator, .kernel.proc
 ; continue
-    BSR 1
+    IMM 0, 0x0F
+    AND @task
     @MMU @mmu.pid_register
     @MMU16LABEL kernel.restore
     @MMU @mmu.intermediate_load
