@@ -16,6 +16,7 @@
     @MMUSTATICARG .kernel.proc+
     @MMU @mmu.kernel_data_target
     @MMU @mmu.pid_load
+    BSL 1
     RST @proc_iterator_index
     CND #zero
 .find_nonempty_iteration:
@@ -25,7 +26,7 @@
     IMM 0, @stride
     ADD @proc_iterator_index
     RST @proc_iterator_index
-    MLD @proc_iterator_index, 0
+    MLD @proc_iterator_index, .kernel.proc
     BRH 0, .find_nonempty_iteration
 ; ignore swap if same context
     @MMU @mmu.pid_load
@@ -33,6 +34,7 @@
     BRH 0, .continue
 ; swap context
     AST @proc_iterator_index
+    BSR 1
     @MMU @mmu.pid_register
 .continue:
     @MMU16LABEL kernel.restore

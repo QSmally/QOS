@@ -12,7 +12,7 @@
 
 .main:
     @MMU @mmu.pid_load
-    BSL 3
+    BSL 4
     RST @base_location
 ; swap
     MLD @base_location, 0x87

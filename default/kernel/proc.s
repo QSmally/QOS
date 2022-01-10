@@ -2,15 +2,17 @@
 @ADDRESSABLE kernel.proc
 
 // Two byte stride
-// a.bb.ccccc
-// dddddddd
+// 0: aa.bb.cccc
+// 1: dddddddd
 
-// a: has execution loop
+// a: age index
 // b: priority index
-// c: process index
+// c: pid
+// d: segment address
 
+.&kernel.proc.swap_index:
+    0x02
 .&kernel.proc.main:
-    0x01
     .os.main+
-.&kernel.proc.others:
+.&kernel.proc.tasks:
     %array 30

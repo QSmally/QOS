@@ -13,13 +13,10 @@
     @MMUSTATICARG .kernel.proc+
     @MMU @mmu.kernel_data_target
     @MMU @mmu.pid_load
+    BRL 1
     RST @current_proc_index
     IMM 0, 0
-    MST @current_proc_index, 0
-    MST @current_proc_index, 1
-; decrement process count
-    MLD 0, .kernel.proc.main!
-    DEC 0
-    MST 0, .kernel.proc.main!
+    MST @current_proc_index, 0x40
+    MST @current_proc_index, 0x41
 ; continue
     @GOTO kernel.calls.swap_point
