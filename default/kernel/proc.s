@@ -11,7 +11,7 @@
 // d: segment address
 
 .&kernel.proc.swap_index:
-    0x02
+    0x00
 .&kernel.proc.main:
     .os.main+
 .&kernel.proc.tasks:
