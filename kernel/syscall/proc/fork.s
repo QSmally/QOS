@@ -29,7 +29,7 @@
 ; maximum index panic
     @IF !performance-unsafe
         BSR 5
-        BRH .overflow_panic
+        BRH 0, .overflow_panic
     @END
     MLD @new_proc_index, .kernel.proc
     BRH 0, .find_empty_iteration

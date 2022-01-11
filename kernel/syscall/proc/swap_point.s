@@ -12,6 +12,7 @@
 @DECLARE iterator 1
 @DECLARE task 2
 @DECLARE task_priority 3
+@DECLARE target_segment_address 4
 @DECLARE age_removal_bits 4
 
 @DECLARE stride 2
@@ -44,7 +45,16 @@
 ; continue
     IMM 0, 0x0F
     AND @task
+    RST @task
     @MMU @mmu.pid_register
+    MLD @iterator, 0x41
+    CPS @target_segment_address
+    @MMUSTATICARG .kernel.swap+
+    @MMU @mmu.kernel_data_target
+    AST @task
+    BSL 1
+    MLD 7, 0x80
+    CPS 7
     @MMU16LABEL kernel.restore
     @MMU @mmu.intermediate_load
 .empty_iteration:
