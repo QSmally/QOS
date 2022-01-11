@@ -12,6 +12,7 @@
 @DECLARE iterator 1
 @DECLARE task 2
 @DECLARE task_priority 3
+@DECLARE age_removal_bits 4
 
 @DECLARE stride 2
 @DECLARE max_proc 30
@@ -55,11 +56,10 @@
     RST @iterator
     JMP .find_priority_iteration
 .reset_iteration_stash:
+    IMM @age_removal_bits, 0b00111111
     .reset_iteration:
         MLD @iterator, .kernel.proc
-        RST @task
-        IMM 0, 0b11000000
-        IMP @task
+        AND @age_removal_bits
         MST @iterator, .kernel.proc
     ; decrement iterator
         IMM 0, @stride
