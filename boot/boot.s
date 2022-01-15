@@ -6,7 +6,7 @@
 @DECLARE string_iterator 1
 
 .main:
-    IMM @string_iterator, .kernel.str.qos
+    IMM @string_iterator, .qosstring
     CND #!zero
 .load_char:
     MLD @string_iterator, 0
@@ -18,3 +18,7 @@
     PST 0, @port.io
     INC @string_iterator
     JMP 0, .load_char
+
+.qosstring(24):
+    $QOS
+    0x00
