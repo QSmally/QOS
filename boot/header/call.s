@@ -4,8 +4,4 @@
 // address byte to the call stack, and requesting the new instruction page from
 // memory.
 
-@DECLARE return_label %random
-
-CPS 0, .@return_label
-JMP 0, .@subroutine_label
-.@return_label:
+CTS 0, .@subroutine_label

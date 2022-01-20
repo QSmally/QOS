@@ -1,7 +1,6 @@
 @HEADER RETURN
 
-// Jumps back to the last call context, assuming that it's from a call within the
-// same segment scope.
+// Jumps back to the last context within this segment.
 
-CPL
+CPA
 JMP 7, 0
