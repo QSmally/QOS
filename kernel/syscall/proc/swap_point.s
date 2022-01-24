@@ -19,8 +19,8 @@
 @DECLARE max_proc 30
 
 .main:
-    @MMUSTATICARG .kernel.proc+
-    @MMU @mmu.kernel_data_target
+    IMM 0, .kernel.proc+
+    MMU @mmu.kernel_data_target
     MLD 0, .kernel.proc.swap_index!
     RST @iterator
     CND #zero
@@ -46,17 +46,18 @@
     IMM 0, 0x0F
     AND @task
     RST @task
-    @MMU @mmu.pid_register
+    MMU @mmu.pid_register
     MLD @iterator, 0x41
     CPS @target_segment_address
-    @MMUSTATICARG .kernel.swap+
-    @MMU @mmu.kernel_data_target
+    IMM 0, .kernel.swap+
+    MMU @mmu.kernel_data_target
     AST @task
     BSL 1
     MLD 7, 0x80
     CPS 7
-    @MMU16LABEL kernel.restore
-    @MMU @mmu.intermediate_load
+    IMM 0, .kernel.restore+
+    MMU @mmu.instruction_target
+    JMP 0, 0
 .empty_iteration:
     IMM 0, @max_proc
     SUB @iterator

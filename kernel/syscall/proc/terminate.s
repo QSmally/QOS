@@ -10,9 +10,9 @@
 @DECLARE current_proc_index 1
 
 .main:
-    @MMUSTATICARG .kernel.proc+
-    @MMU @mmu.kernel_data_target
-    @MMU @mmu.pid_load
+    IMM 0, .kernel.proc+
+    MMU @mmu.kernel_data_target
+    MMU @mmu.pid_load
     BSL 1
     RST @current_proc_index
     IMM 0, 0

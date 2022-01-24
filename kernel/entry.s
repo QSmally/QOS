@@ -6,10 +6,10 @@
 .main:
     PPL
     RSH 0
-    PPS 7
+    PPS 0
     CND #underflow
     BRH 0, .syscall
     @CALL kernel.swap
 .syscall:
-    @MMUDYNAMICARG PPL
-    @MMU @mmu.kernel_intermediate_load
+    PPL
+    MMU @mmu.kernel_intermediate_load

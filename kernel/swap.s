@@ -17,12 +17,12 @@
 @DECLARE base_location 1
 
 .main:
-    CPS 1
-    @MMU @mmu.pid_load
+    PPS 1
+    MMU @mmu.pid_load
     BSL 4
     RST @base_location
 ; swap
-    CPL
+    PPL
     MST @base_location, 0x81
     AST 2
     MST @base_location, 0x82

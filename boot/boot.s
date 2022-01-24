@@ -12,8 +12,9 @@
     MLD @string_iterator, 0
     BRH 0, .print_char
 ; start os
-    @MMU16LABEL os.main
-    @MMU @mmu.exit_intermediate_load
+    IMM 0, .os.main+
+    MMU @mmu.instruction_target
+    JMP 0, .os.main
 .print_char:
     PST 0, @port.io
     INC @string_iterator

@@ -7,5 +7,6 @@
 // Returns: empty tuple
 
 .main:
-    @MMU16LABEL kernel.restore
-    @MMU @mmu.intermediate_load
+    IMM 0, .kernel.restore!+
+    MMU @mmu.instruction_segment
+    JMP 0, .kernel.restore!

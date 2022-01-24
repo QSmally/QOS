@@ -17,8 +17,8 @@
 @DECLARE stride 2
 
 .main:
-    @MMUSTATICARG .kernel.proc+
-    @MMU @mmu.kernel_data_target
+    IMM 0, .kernel.proc+
+    MMU @mmu.kernel_data_target
     IMM @new_proc_index, 0
     IMM @stride_location, @stride
     CND #!zero
@@ -34,7 +34,7 @@
     MLD @new_proc_index, .kernel.proc
     BRH 0, .find_empty_iteration
 ; insert parent pid
-    @MMU @mmu.pid_load
+    MMU @mmu.pid_load
     MST @new_proc_index, .kernel.proc
 ; insert target segment
     PPL
@@ -42,18 +42,19 @@
 ; swap to new pid
     AST @new_proc_index
     BSR 1
-    @MMU @mmu.pid_register
+    MMU @mmu.pid_register
 ; save address
-    @MMUSTATICARG .kernel.swap+
-    @MMU @mmu.kernel_data_target
+    IMM 0, .kernel.swap+
+    MMU @mmu.kernel_data_target
     AST @new_proc_index
     BSR 3
     RST @context_store_location
     CPL
     MST @context_store_location, 0x80
 ; continue
-    @MMUDYNAMICARG AST @new_proc_index
-    @MMU @mmu.exit_intermediate_load
+    AST @new_proc_index
+    MMU @mmu.instruction_target
+    JMP 0, 0
 @IF !performance-unsafe
     .overflow_panic:
         @MMU16LABEL kernel.panic

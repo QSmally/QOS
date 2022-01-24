@@ -11,7 +11,7 @@
 @DECLARE base_location 1
 
 .main:
-    @MMU @mmu.pid_load
+    MMU @mmu.pid_load
     BSL 4
     RST @base_location
 ; swap
@@ -30,6 +30,8 @@
     MLD @base_location, 0x81
     RST 1
 ; return
-    @MMUDYNAMICARG CPL
-    @MMUDYNAMICARG CPL
-    @MMU @mmu.exit_intermediate_load
+    CPL
+    MMU @mmu.instruction_target
+    MMU @mmu.kernel_exit
+    CPA
+    JMP 0, 0

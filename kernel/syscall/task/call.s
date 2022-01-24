@@ -10,6 +10,8 @@
 // TODO: filesystem permissions
 
 .main:
-    @MMUDYNAMICARG PPL
-    @MMUDYNAMICARG PPL
-    @MMU @mmu.exit_intermediate_load
+    PPL
+    MMU @mmu.instruction_segment
+    MMU @mmu.kernel_exit
+    PPL
+    JMP 7, 0
