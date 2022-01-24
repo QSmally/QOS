@@ -57,7 +57,7 @@
     CPS 7
     IMM 0, .kernel.restore+
     MMU @mmu.instruction_target
-    JMP 0, 0
+    JMP 0, .kernel.restore
 .empty_iteration:
     IMM 0, @max_proc
     SUB @iterator
