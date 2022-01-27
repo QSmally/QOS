@@ -33,5 +33,4 @@
     CPL
     MMU @mmu.instruction_target
     MMU @mmu.kernel_exit
-    CPA
-    JMP 0, 0
+    @RETURN
