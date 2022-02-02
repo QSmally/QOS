@@ -11,8 +11,8 @@
 // TODO: filesystem permissions
 
 .main:
-    @MMUDYNAMICARG PPL
-    @MMU @mmu.data_target
+    PPL
+    MMU @mmu.data_target
     IMM 0, .kernel.restore+
     MMU @mmu.instruction_target
     JMP 0, .kernel.restore
