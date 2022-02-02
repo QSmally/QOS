@@ -57,6 +57,7 @@
     JMP 0, 0
 @IF !performance-unsafe
     .overflow_panic:
-        @MMU16LABEL kernel.panic
-        @MMU @mmu.exit_intermediate_load
+        IMM 0, .kernel.panic+
+        MMU @mmu.instruction_target
+        JMP 0, .kernel.panic
 @END

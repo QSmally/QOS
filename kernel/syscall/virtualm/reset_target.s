@@ -8,5 +8,6 @@
 
 .main:
     @MMU @mmu.reset_data_target
-    @MMU16LABEL kernel.restore
-    @MMU @mmu.intermediate_load
+    IMM 0, .kernel.restore+
+    MMU @mmu.instruction_target
+    JMP 0, .kernel.restore
