@@ -1,5 +1,6 @@
-@PAGE 2 2
+@PAGE 2 3
 @ADDRESSABLE kernel.calls.swap_point
+@OVERFLOWABLE
 
 // Switches contexts to another process, depends on the process cycle age and
 // priority. It uses a round robin-like process scheduling algorithm which adds
@@ -24,7 +25,7 @@
     MLD 0, .kernel.proc.swap_index!
     RST @iterator
     CND #zero
-.find_priority_iteration:
+.&find_priority_iteration:
     MLD @iterator, .kernel.proc
     BRH 0, .empty_iteration
 ; skip if no priority
@@ -48,17 +49,18 @@
     RST @task
     MMU @mmu.pid_register
     MLD @iterator, 0x41
-    CPS @target_segment_address
+    ; TODO: fix missing feature: dynamically push accumulator to call stack
+    ; CPS @target_segment_address
     IMM 0, .kernel.swap+
     MMU @mmu.kernel_data_target
     AST @task
     BSL 1
     MLD 7, 0x80
-    CPS 7
+    ; CPS 7
     IMM 0, .kernel.restore+
     MMU @mmu.instruction_target
     JMP 0, .kernel.restore
-.empty_iteration:
+.&empty_iteration:
     IMM 0, @max_proc
     SUB @iterator
     BRH .reset_iteration_stash

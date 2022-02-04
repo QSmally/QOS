@@ -1,4 +1,4 @@
-@PAGE 2 7
+@PAGE 3 1
 
 // Sets the segment for data memory to the instruction segment address.
 

@@ -1,4 +1,5 @@
 @PAGE 2 0
+@OVERFLOWABLE
 
 // Spawns a new process and immediately starts executing the zero-page of it. This
 // kernel call should be called with the snapshot QOS header, as its context and
@@ -56,7 +57,7 @@
     MMU @mmu.instruction_target
     JMP 0, 0
 @IF !performance-unsafe
-    .overflow_panic:
+    .&overflow_panic:
         IMM 0, .kernel.panic+
         MMU @mmu.instruction_target
         JMP 0, .kernel.panic
