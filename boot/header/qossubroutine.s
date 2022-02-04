@@ -2,6 +2,9 @@
 
 // A returnable kernel/OS call that pushes the return address onto the call stack.
 
-MMU @mmu.push_instruction_target
-CPP
+@DECLARE return_label %random
+
+CPS, .@return_label+
+CPS, .@return_label
 @QOS @instruction
+.@return_label:
