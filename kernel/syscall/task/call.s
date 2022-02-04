@@ -11,7 +11,7 @@
 
 .main:
     PPL
-    MMU @mmu.instruction_segment
+    MMU @mmu.instruction_target
     MMU @mmu.kernel_exit
     PPL
     JMP 7, 0

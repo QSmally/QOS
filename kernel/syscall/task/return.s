@@ -8,5 +8,5 @@
 
 .main:
     IMM 0, .kernel.restore!+
-    MMU @mmu.instruction_segment
+    MMU @mmu.instruction_target
     JMP 0, .kernel.restore!
