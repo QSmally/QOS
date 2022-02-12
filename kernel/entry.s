@@ -3,7 +3,7 @@
 // The gateway of kernel/OS calls which are made with 'ENT', automatically enters
 // kernel mode and swaps to the right call page.
 
-.main:
+; main
     PPL
     RSH 0
     PPS 0

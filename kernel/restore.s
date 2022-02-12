@@ -10,7 +10,7 @@
 
 @DECLARE base_location 1
 
-.main:
+; main
     MMU @mmu.pid_load
     BSL 4
     RST @base_location
