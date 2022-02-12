@@ -29,8 +29,13 @@
 ; maximum index panic
     @IF !performance-unsafe
         BSR 5
-        BRH #!zero, .overflow_panic
+        BRH #zero, .non_overflow
+    ; overflow panic
+        IMM 0, .kernel.panic+
+        MMU @mmu.instruction_target
+        JMP 0, .kernel.panic
     @END
+.non_overflow:
     MLD @new_proc_index, .kernel.proc
     BRH #!zero, .find_empty_iteration
 ; insert parent pid
@@ -55,9 +60,3 @@
     AST @new_proc_index
     MMU @mmu.instruction_target
     JMP 0, 0
-@IF !performance-unsafe
-    .&overflow_panic:
-        IMM 0, .kernel.panic+
-        MMU @mmu.instruction_target
-        JMP 0, .kernel.panic
-@END
