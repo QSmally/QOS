@@ -5,12 +5,11 @@
 
 @DECLARE string_iterator 1
 
-.main:
+; main
     IMM @string_iterator, .qosstring
-    CND #!zero
 .load_char:
     MLD @string_iterator, 0
-    BRH 0, .print_char
+    BRH #!zero, .print_char
 ; start os
     IMM 0, .os.main+
     MMU @mmu.instruction_target
@@ -21,5 +20,5 @@
     JMP 0, .load_char
 
 .qosstring(24):
-    $QOS
+    $login >
     0x00

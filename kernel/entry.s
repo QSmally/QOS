@@ -7,8 +7,7 @@
     PPL
     RSH 0
     PPS 0
-    CND #underflow
-    BRH 0, .syscall
+    BRH #underflow, .syscall
     @CALL kernel.swap
 .syscall:
     PPL

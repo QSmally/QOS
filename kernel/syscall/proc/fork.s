@@ -17,12 +17,11 @@
 
 @DECLARE stride 2
 
-.main:
+; main
     IMM 0, .kernel.proc+
     MMU @mmu.kernel_data_target
     IMM @new_proc_index, 0
     IMM @stride_location, @stride
-    CND #!zero
 .find_empty_iteration:
     AST @new_proc_index
     ADD @stride_location
@@ -30,10 +29,10 @@
 ; maximum index panic
     @IF !performance-unsafe
         BSR 5
-        BRH 0, .overflow_panic
+        BRH #!zero, .overflow_panic
     @END
     MLD @new_proc_index, .kernel.proc
-    BRH 0, .find_empty_iteration
+    BRH #!zero, .find_empty_iteration
 ; insert parent pid
     MMU @mmu.pid_load
     MST @new_proc_index, .kernel.proc

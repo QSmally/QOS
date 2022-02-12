@@ -18,26 +18,25 @@
 @DECLARE stride 2
 @DECLARE max_proc 30
 
-.main:
+; main
     IMM 0, .kernel.proc+
     MMU @mmu.kernel_data_target
     MLD 0, .kernel.proc.swap_index!
     RST @iterator
-    CND #zero
 .&find_priority_iteration:
     MLD @iterator, .kernel.proc
-    BRH 0, .empty_iteration
+    BRH #zero, .empty_iteration
 ; skip if no priority
     BSR 4
     RST @task
     IMM 0, 0x03
     AND @task
     RST @task_priority
-    BRH 0, .empty_iteration
+    BRH #zero, .empty_iteration
 ; skip if fulfilled
     BSR 2
     SUB @task_priority
-    BRH 0, .empty_iteration
+    BRH #zero, .empty_iteration
 ; increment task age
     IMM 0, 0x40
     ADD @task
@@ -76,6 +75,6 @@
         IMM 0, @stride
         SUB @iterator
         RST @iterator
-        BRH 0, .find_priority_iteration
+        BRH #zero, .find_priority_iteration
     ; run loop
         JMP 0, .reset_iteration
