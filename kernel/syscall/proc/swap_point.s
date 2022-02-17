@@ -64,7 +64,7 @@
     IMM 0, @stride
     ADD @iterator
     RST @iterator
-    JMP .find_priority_iteration
+    JMP 0, .find_priority_iteration
 .reset_iteration_stash:
     IMM @age_removal_bits, 0b00111111
     .reset_iteration:
