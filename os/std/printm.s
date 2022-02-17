@@ -13,10 +13,9 @@
 .main:
     PPL
     RST @location
-    CND #zero
 .print_loop:
     MLD @location, 0
-    BRH 0, .return
+    BRH #zero, .return
     PST 0, @port.io
     INC @location
     JMP 0, .print_loop

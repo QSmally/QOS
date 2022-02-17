@@ -14,10 +14,9 @@
     PPL
     RST @location
     IMM @count, 0
-    CND #zero
 .byte_loop:
     MLD @location, 0
-    BRH 0, .return
+    BRH #zero, .return
     INC @location
     INC @count
     JMP 0, .byte_loop

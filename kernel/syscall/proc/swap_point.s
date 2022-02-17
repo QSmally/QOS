@@ -47,13 +47,13 @@
     RST @task
     MMU @mmu.pid_register
     MLD @iterator, 0x41
-    CPS
+    CPS 7
     IMM 0, .kernel.swap+
     MMU @mmu.kernel_data_target
     AST @task
     BSL 1
     MLD 7, 0x80
-    CPS
+    CPS 7
     IMM 0, .kernel.restore+
     MMU @mmu.instruction_target
     JMP 0, .kernel.restore

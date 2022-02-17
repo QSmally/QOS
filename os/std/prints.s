@@ -12,10 +12,9 @@
 .main:
     PPL
     RST @amount
-    CND #zero
 .print_loop:
     AST @amount
-    BRH 0, .return
+    BRH #zero, .return
     PPL
     PST 0, @port.io
     DEC @amount
