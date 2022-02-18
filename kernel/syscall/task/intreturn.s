@@ -8,4 +8,4 @@
 // Returns: empty tuple
 
 .main:
-    @GOTO kernel.calls.swap_point
+    @GOTO kernel.swap_point

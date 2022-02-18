@@ -19,4 +19,4 @@
     MST @current_proc_index, 0x40
     MST @current_proc_index, 0x41
 ; continue
-    @GOTO kernel.calls.swap_point
+    @GOTO kernel.swap_point

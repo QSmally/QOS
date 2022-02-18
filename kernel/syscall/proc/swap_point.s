@@ -1,5 +1,5 @@
 @PAGE 2 3
-@ADDRESSABLE kernel.calls.swap_point
+@ADDRESSABLE kernel.swap_point
 @OVERFLOWABLE
 
 // Switches contexts to another process, depends on the process cycle age and
