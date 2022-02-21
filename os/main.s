@@ -1,5 +1,5 @@
-@PAGE 3 0
+@PAGE 5 0
 @ADDRESSABLE os.main
 
-.main:
-    JMP 0, .main
+.spin_lock:
+    JMP 0, .spin_lock
