@@ -3,6 +3,11 @@
 // The gateway of kernel/OS calls which are made with 'ENT', automatically enters
 // kernel mode and swaps to the right call page.
 
+// TODO:
+// For QCPU CLI, add an 'emulator' configuration closure in the defaults file to
+// configure the address for the ENT instruction, generate an MMU enumeration
+// automatically and construct the address array for '(kernel_)intermediate_load'.
+
 ; main
     PPL
     RSH 0
