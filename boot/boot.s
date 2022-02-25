@@ -13,6 +13,7 @@
 ; start os
     IMM 0, .os.main+
     MMU @mmu.instruction_target
+    MMU @mmu.kernel_exit
     JMP 0, .os.main
 .print_char:
     PST 0, @port.io
