@@ -60,7 +60,7 @@
 .&empty_iteration:
     IMM 0, @max_proc
     SUB @iterator
-    BRH .reset_iteration_stash
+    BRH #zero, .reset_iteration_stash
     IMM 0, @stride
     ADD @iterator
     RST @iterator
