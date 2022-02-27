@@ -23,8 +23,7 @@
     1 ; 11, interrupt return
 
 .main(16):
-    PPL
-    PPS 0 ; TODO: stack-peek instruction
+    PPK
     MLD 7, .swapnt_map
     BRH #!zero, .syscall
     @CALL kernel.swap
