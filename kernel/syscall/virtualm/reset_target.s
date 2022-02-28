@@ -8,7 +8,8 @@
 
 .main:
     MMU @mmu.instruction_target_load
-    MMU @mmu.instruction_target
+    MMU @mmu.data_target
+; return
     IMM 0, .kernel.restore+
     MMU @mmu.instruction_target
-    JMP 0, .kernel.restore
+    @GOTO kernel.restore
