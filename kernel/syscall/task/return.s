@@ -7,6 +7,6 @@
 // Returns: empty tuple
 
 .main:
-    IMM 0, .kernel.restore!+
+    IMM acc, .kernel.restore!+
     MMU @mmu.instruction_target
-    JMP 0, .kernel.restore!
+    JMP zer, .kernel.restore!

@@ -14,6 +14,6 @@
     PPL
     MMU @mmu.data_target
 ; return
-    IMM 0, .kernel.restore+
+    IMM acc, .kernel.restore+
     MMU @mmu.instruction_target
     @GOTO kernel.restore

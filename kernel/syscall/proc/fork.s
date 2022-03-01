@@ -18,7 +18,7 @@
 @DECLARE stride 2
 
 ; main
-    IMM 0, .kernel.proc+
+    IMM acc, .kernel.proc+
     MMU @mmu.kernel_data_target
     IMM @new_proc_index, 0
     IMM @stride_location, @stride
@@ -31,9 +31,9 @@
         BSR 5
         BRH #zero, .non_overflow
     ; overflow panic
-        IMM 0, .kernel.panic+
+        IMM acc, .kernel.panic+
         MMU @mmu.instruction_target
-        JMP 0, .kernel.panic
+        JMP zer, .kernel.panic
     @END
 .non_overflow:
     MLD @new_proc_index, .kernel.proc
@@ -49,7 +49,7 @@
     BSR 1
     MMU @mmu.pid_register
 ; save address
-    IMM 0, .kernel.swap+
+    IMM acc, .kernel.swap+
     MMU @mmu.kernel_data_target
     AST @new_proc_index
     BSR 3
@@ -59,4 +59,4 @@
 ; continue
     AST @new_proc_index
     MMU @mmu.instruction_target
-    JMP 0, 0
+    JMP zer, 0

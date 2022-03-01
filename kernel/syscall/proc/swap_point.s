@@ -19,9 +19,9 @@
 @DECLARE max_proc 30
 
 ; main
-    IMM 0, .kernel.proc+
+    IMM acc, .kernel.proc+
     MMU @mmu.kernel_data_target
-    MLD 0, .kernel.proc.swap_index!
+    MLD zer, .kernel.proc.swap_index!
     RST @iterator
 .&find_priority_iteration:
     MLD @iterator, .kernel.proc
@@ -29,7 +29,7 @@
 ; skip if no priority
     BSR 4
     RST @task
-    IMM 0, 0x03
+    IMM acc, 0x03
     AND @task
     RST @task_priority
     BRH #zero, .empty_iteration
@@ -38,33 +38,33 @@
     SUB @task_priority
     BRH #zero, .empty_iteration
 ; increment task age
-    IMM 0, 0x40
+    IMM acc, 0x40
     ADD @task
     MST @iterator, .kernel.proc
 ; continue
-    IMM 0, 0x0F
+    IMM acc, 0x0F
     AND @task
     RST @task
     MMU @mmu.pid_register
     MLD @iterator, 0x41
-    CPS 7
-    IMM 0, .kernel.swap+
+    CPS acc
+    IMM acc, .kernel.swap+
     MMU @mmu.kernel_data_target
     AST @task
     BSL 1
-    MLD 7, 0x80
-    CPS 7
-    IMM 0, .kernel.restore+
+    MLD acc, 0x80
+    CPS acc
+    IMM acc, .kernel.restore+
     MMU @mmu.instruction_target
-    JMP 0, .kernel.restore
+    JMP zer, .kernel.restore
 .&empty_iteration:
-    IMM 0, @max_proc
+    IMM acc, @max_proc
     SUB @iterator
     BRH #zero, .reset_iteration_stash
-    IMM 0, @stride
+    IMM acc, @stride
     ADD @iterator
     RST @iterator
-    JMP 0, .find_priority_iteration
+    JMP zer, .find_priority_iteration
 .reset_iteration_stash:
     IMM @age_removal_bits, 0b00111111
     .reset_iteration:
@@ -72,9 +72,9 @@
         AND @age_removal_bits
         MST @iterator, .kernel.proc
     ; decrement iterator
-        IMM 0, @stride
+        IMM acc, @stride
         SUB @iterator
         RST @iterator
         BRH #zero, .find_priority_iteration
     ; run loop
-        JMP 0, .reset_iteration
+        JMP zer, .reset_iteration

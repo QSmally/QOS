@@ -14,4 +14,4 @@
     MMU @mmu.instruction_target
     MMU @mmu.kernel_exit
     PPL
-    JMP 7, 0
+    JMP acc, 0

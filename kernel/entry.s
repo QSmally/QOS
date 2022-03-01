@@ -24,7 +24,7 @@
 
 .main(16):
     PPK
-    MLD 7, .swapnt_map
+    MLD acc, .swapnt_map
     BRH #!zero, .syscall
     @CALL kernel.swap
 .syscall:
