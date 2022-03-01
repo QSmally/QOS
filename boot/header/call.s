@@ -4,4 +4,4 @@
 // address byte to the call stack, and requesting the new instruction page from
 // memory.
 
-CAL zero, .@subroutine_label
+CAL zer, .@subroutine_label

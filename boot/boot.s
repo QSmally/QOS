@@ -11,14 +11,14 @@
     MLD @string_iterator, 0
     BRH #!zero, .print_char
 ; start os
-    IMM accumulator, .os.main+
+    IMM acc, .os.main+
     MMU @mmu.instruction_target
     MMU @mmu.kernel_exit
-    JMP zero, .os.main
+    JMP zer, .os.main
 .print_char:
-    PST zero, @port.io
+    PST zer, @port.io
     INC @string_iterator
-    JMP zero, .load_char
+    JMP zer, .load_char
 
 .qosstring(24):
     $login >

@@ -5,7 +5,7 @@
 
 .call_trace:
     CPL
-    PST zero, @port.io
+    PST zer, @port.io
     BRH #!zero, .call_trace
 .spin_lock:
-    JMP zero, .spin_lock
+    JMP zer, .spin_lock

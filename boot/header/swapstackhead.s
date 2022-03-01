@@ -5,4 +5,4 @@
 
 PPL
 XCH @register
-PPS accumulator
+PPS acc
