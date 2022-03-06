@@ -10,7 +10,7 @@
 
 // TODO: filesystem permissions
 
-.main:
+; main
     PPL
     MMU @mmu.data_target
 ; return

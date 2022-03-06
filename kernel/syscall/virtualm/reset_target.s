@@ -6,7 +6,7 @@
 // Arguments: empty tuple
 // Returns: empty tuple
 
-.main:
+; main
     MMU @mmu.instruction_target_load
     MMU @mmu.data_target
 ; return

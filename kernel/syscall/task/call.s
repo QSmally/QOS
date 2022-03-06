@@ -9,7 +9,7 @@
 
 // TODO: filesystem permissions
 
-.main:
+; main
     PPL
     MMU @mmu.instruction_target
     MMU @mmu.kernel_exit

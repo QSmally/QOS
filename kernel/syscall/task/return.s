@@ -6,7 +6,7 @@
 // Arguments: subroutine return values
 // Returns: empty tuple
 
-.main:
+; main
     IMM acc, .kernel.restore!+
     MMU @mmu.instruction_target
     JMP zer, .kernel.restore!

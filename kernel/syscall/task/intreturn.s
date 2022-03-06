@@ -7,5 +7,5 @@
 // Arguments: empty tuple
 // Returns: empty tuple
 
-.main:
+; main
     @GOTO kernel.swap_point

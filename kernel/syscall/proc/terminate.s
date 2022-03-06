@@ -9,7 +9,7 @@
 
 @DECLARE current_proc_index 1
 
-.main:
+; main
     IMM acc, .kernel.proc+
     MMU @mmu.kernel_data_target
     MMU @mmu.pid_load
