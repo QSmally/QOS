@@ -9,15 +9,15 @@
 
 @DECLARE amount 1
 
-.main:
+; main
     PPL
     RST @amount
 .print_loop:
     AST @amount
     BRH #zero, .return
     PPL
-    PST 0, @port.io
+    PST acc, @port.io
     DEC @amount
-    JMP 0, .print_loop
+    JMP zer, .print_loop
 .return:
     @QOS @kernel.return

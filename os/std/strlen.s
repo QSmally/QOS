@@ -10,7 +10,7 @@
 @DECLARE location 1
 @DECLARE count 2
 
-.main:
+; main
     PPL
     RST @location
     IMM @count, 0
@@ -19,7 +19,7 @@
     BRH #zero, .return
     INC @location
     INC @count
-    JMP 0, .byte_loop
+    JMP zer, .byte_loop
 .return:
     PPS @count
     @QOS @kernel.return

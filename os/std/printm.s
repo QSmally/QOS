@@ -10,14 +10,14 @@
 
 @DECLARE location 1
 
-.main:
+; main
     PPL
     RST @location
 .print_loop:
     MLD @location, 0
     BRH #zero, .return
-    PST 0, @port.io
+    PST acc, @port.io
     INC @location
-    JMP 0, .print_loop
+    JMP zer, .print_loop
 .return:
     @QOS @kernel.return
