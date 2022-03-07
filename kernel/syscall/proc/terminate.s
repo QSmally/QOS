@@ -12,6 +12,7 @@
 ; main
     IMM acc, .kernel.proc+
     MMU @mmu.kernel_data_target
+    PRF .kernel.proc-
     MMU @mmu.pid_load
     BSL 1
     RST @current_proc_index

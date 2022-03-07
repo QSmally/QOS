@@ -20,6 +20,7 @@
 ; main
     IMM acc, .kernel.proc+
     MMU @mmu.kernel_data_target
+    PRF .kernel.proc-
     IMM @new_proc_index, 0
     IMM @stride_location, @stride
 .find_empty_iteration:
