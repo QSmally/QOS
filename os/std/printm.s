@@ -16,7 +16,7 @@
 .print_loop:
     MLD @location, 0
     BRH #zero, .return
-    PST acc, @port.io
+    PST zer, @port.io
     INC @location
     JMP zer, .print_loop
 .return:
