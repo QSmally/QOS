@@ -20,6 +20,7 @@
     INC @string_iterator
     JMP zer, .load_char
 
-.qosstring(24):
+.qosstring:
+    $QOS, 0x0A
     $login >
     0x00
