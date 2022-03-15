@@ -1,4 +1,7 @@
 {
+    "ports": [
+        { "name": "debug/ascii", "type": "io" }
+    ],
     "kernel_entryCall": [1, 0, 16],
     "kernel_mapping": {
         "0": [2, 0],
