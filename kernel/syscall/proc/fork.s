@@ -5,7 +5,7 @@
 // kernel call should be called with the snapshot QOS header, as its context and
 // application address will be stored as a snapshot.
 
-// Type: returnable
+// Type: returnable (@QOSTRACECALL)
 // Arguments: segment address
 // Returns: empty tuple
 
@@ -18,46 +18,53 @@
 @DECLARE stride 2
 
 ; main
-    IMM acc, .kernel.proc+
+    IMM acc, .kernel.proc!+
     MMU @mmu.kernel_data_target
-    PRF .kernel.proc-
-    IMM @new_proc_index, 0
+    PRF .kernel.proc!-
+; register init
     IMM @stride_location, @stride
+    IMM @new_proc_index, 0
+
 .find_empty_iteration:
     AST @new_proc_index
     ADD @stride_location
     RST @new_proc_index
-; maximum index panic
+; exceeds process maximum
     @IF !performance-unsafe
         BSR 5
-        BRH #zero, .non_overflow
-    ; overflow panic
-        IMM acc, .kernel.panic+
+        BRH #zero, .in_bounds
+    ; panic
+        IMM acc, .kernel.panic!+
         MMU @mmu.instruction_target
-        JMP zer, .kernel.panic
+        JMP zer, .kernel.panic!
     @END
-.non_overflow:
-    MLD @new_proc_index, .kernel.proc
+.in_bounds:
+    MLD @new_proc_index, .kernel.proc!
     BRH #!zero, .find_empty_iteration
-; insert parent pid
+
+; place parent pid
     MMU @mmu.pid_load
-    MST @new_proc_index, .kernel.proc
-; insert target segment
-    PPL
-    MST @new_proc_index, 0x41
-; swap to new pid
-    AST @new_proc_index
-    BSR 1
-    MMU @mmu.pid_register
-; save address
-    IMM acc, .kernel.swap+
+    MST @new_proc_index, .kernel.proc!
+; place target segment
+    PPK
+    MST @new_proc_index
+    .kernel.proc! 0x01
+
+; snapshot location in context store
+    IMM acc, .kernel.swap!+
     MMU @mmu.kernel_data_target
-    AST @new_proc_index
-    BSR 3
+; save call stack head
+    MMU @mmu.pid_load
+    BSL 4
     RST @context_store_location
     CPL
     MST @context_store_location, 0x80
-; continue
+
+; configure new pid
     AST @new_proc_index
+    BSR 1
+    MMU @mmu.pid_register
+; continue
+    PPL
     MMU @mmu.instruction_target
-    JMP zer, 0
+    JMP zer, 0x00

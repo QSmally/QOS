@@ -10,14 +10,20 @@
 @DECLARE current_proc_index 1
 
 ; main
-    IMM acc, .kernel.proc+
+    IMM acc, .kernel.proc!+
     MMU @mmu.kernel_data_target
     PRF .kernel.proc-
+
+; generate address
     MMU @mmu.pid_load
     BSL 1
     RST @current_proc_index
+; remove entry
     IMM acc, 0
-    MST @current_proc_index, 0x40
-    MST @current_proc_index, 0x41
+    MST @current_proc_index,
+    .kernel.proc! 0x00
+    MST @current_proc_index
+    .kernel.proc! 0x01
+
 ; continue
     @GOTO kernel.swap_point
