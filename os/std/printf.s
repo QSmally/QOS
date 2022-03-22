@@ -1,5 +1,5 @@
 @PAGE 4 1
-@ADDRESSABLE std.printm
+@ADDRESSABLE std.printf
 
 // Prints a string from a start location in memory, expects a null-byte ending the
 // string.

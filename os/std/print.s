@@ -1,5 +1,5 @@
 @PAGE 4 0
-@ADDRESSABLE std.prints
+@ADDRESSABLE std.print
 
 // Print 'stack' outputs the contents of the stack for some amount of bytes.
 
