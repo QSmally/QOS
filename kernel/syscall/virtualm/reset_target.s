@@ -2,7 +2,7 @@
 
 // Sets the segment for data memory to the instruction segment address.
 
-// Type: returnable
+// Type: returnable (@QOSSUBROUTINE)
 // Arguments: empty tuple
 // Returns: empty tuple
 

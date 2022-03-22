@@ -2,7 +2,7 @@
 
 // Restores and returns from the most recent privileged subroutine.
 
-// Type: non-returnable
+// Type: non-returnable (@QOS)
 // Arguments: subroutine return values
 // Returns: empty tuple
 

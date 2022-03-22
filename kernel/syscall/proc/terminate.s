@@ -3,7 +3,7 @@
 // Terminates the process which is currently active. It must be called with the
 // unaddressed syscall header.
 
-// Type: non-returnable
+// Type: non-returnable (@QOS)
 // Arguments: empty tuple
 // Returns: empty tuple
 

@@ -4,7 +4,7 @@
 // data memory. It will automatically reset this when switching contexts to another
 // process. However, not when entering privileged subroutines.
 
-// Type: returnable
+// Type: returnable (@QOSSUBROUTINE)
 // Arguments: upper address
 // Returns: empty tuple
 

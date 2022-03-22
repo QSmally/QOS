@@ -3,7 +3,7 @@
 // Calls to subroutine on another segment and requires the permission to be granted
 // by that node.
 
-// Type: returnable
+// Type: returnable (@QOSSUBROUTINE)
 // Arguments: subroutine parameters, upper address, lower address
 // Returns: defined by subroutine
 
