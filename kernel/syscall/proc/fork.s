@@ -67,4 +67,7 @@
 ; continue
     PPL
     MMU @mmu.instruction_target
+    ; todo:
+    ; implement a type of 'exit_instruction_target'
+    MMU @mmu.kernel_exit
     JMP zer, 0x00
