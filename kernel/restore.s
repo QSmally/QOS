@@ -13,29 +13,22 @@
 
 ; main
     MMU @mmu.pid_load
-    BSL 4
+    BSL 3
     RST @base_location
 ; swap
-    MLD @base_location
-    @base_context_store 0x07
+    MLD @base_location, 0x87
     RST 7
-    MLD @base_location
-    @base_context_store 0x06
+    MLD @base_location, 0x86
     RST 6
-    MLD @base_location
-    @base_context_store 0x05
+    MLD @base_location, 0x85
     RST 5
-    MLD @base_location
-    @base_context_store 0x04
+    MLD @base_location, 0x84
     RST 4
-    MLD @base_location
-    @base_context_store 0x03
+    MLD @base_location, 0x83
     RST 3
-    MLD @base_location
-    @base_context_store 0x02
+    MLD @base_location, 0x82
     RST 2
-    MLD @base_location
-    @base_context_store 0x01
+    MLD @base_location, 0x81
     RST 1
 ; return
     CPL

@@ -54,7 +54,7 @@
     MMU @mmu.kernel_data_target
 ; save call stack head
     MMU @mmu.pid_load
-    BSL 4
+    BSL 3
     RST @context_store_location
     CPL
     MST @context_store_location, 0x80

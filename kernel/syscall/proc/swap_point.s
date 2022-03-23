@@ -57,16 +57,16 @@
     BRH #zero, .skip_snapshot
 ; save call stack head
     MMU @mmu.pid_load
-    BSL 4
+    BSL 3
     RST @context_store_location
     CPL
     MST @context_store_location, 0x80
 .&skip_snapshot:
-    IMM acc, 0x0F
-    AND @task_metadata
+    AST @iterator
+    BSR 1
     MMU @mmu.pid_register
 ; lower address
-    BSL 4
+    BSL 3
     MLD acc, 0x80
     CPS acc
 ; upper address

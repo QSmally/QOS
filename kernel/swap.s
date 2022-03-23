@@ -15,34 +15,26 @@
 // Returns: empty tuple
 
 @DECLARE base_location 1
-@DECLARE base_context_store 0x80
 
 ; main
     PPS 1
     MMU @mmu.pid_load
-    BSL 4
+    BSL 3
     RST @base_location
 ; swap
     PPL
-    MST @base_location
-    @base_context_store 0x01
+    MST @base_location, 0x81
     AST 2
-    MST @base_location
-    @base_context_store 0x02
+    MST @base_location, 0x82
     AST 3
-    MST @base_location
-    @base_context_store 0x03
+    MST @base_location, 0x83
     AST 4
-    MST @base_location
-    @base_context_store 0x04
+    MST @base_location, 0x84
     AST 5
-    MST @base_location
-    @base_context_store 0x05
+    MST @base_location, 0x85
     AST 6
-    MST @base_location
-    @base_context_store 0x06
+    MST @base_location, 0x86
     AST 7
-    MST @base_location
-    @base_context_store 0x07
+    MST @base_location, 0x87
 ; return
     @RETURN

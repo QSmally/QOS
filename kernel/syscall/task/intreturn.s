@@ -8,4 +8,5 @@
 // Returns: empty tuple
 
 ; main
+    PPI, 0x00
     @GOTO kernel.swap_point
