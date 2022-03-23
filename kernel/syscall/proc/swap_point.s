@@ -6,75 +6,73 @@
 // priority. It uses a round robin-like process scheduling algorithm which adds
 // task priority.
 
-// Type: returnable
-// Arguments: empty tuple
+// Preemptive, round-robin, priority based
+
+// Type: returnable or not-returnable (@QOSTRACECALL or @QOS)
+// Arguments: 1 if returnable, 0 if not
 // Returns: empty tuple
 
 @DECLARE iterator 1
-@DECLARE task 2
-@DECLARE task_priority 3
-@DECLARE age_removal_bits 4
+@DECLARE task_segment 2
+@DECLARE task_metadata 3
+@DECLARE stride_location 4
+@DECLARE context_store_location 4
+@DECLARE iterator_mask 5
 
 @DECLARE stride 2
-@DECLARE max_proc 30
 
 ; main
-    IMM acc, .kernel.proc+
+    IMM acc, .kernel.proc!+
     MMU @mmu.kernel_data_target
+; register init
     MLD zer, .kernel.proc.swap_index!
     RST @iterator
-.&find_priority_iteration:
-    MLD @iterator, .kernel.proc
-    BRH #zero, .empty_iteration
-; skip if no priority
-    BSR 4
-    RST @task
-    IMM acc, 0x03
-    AND @task
-    RST @task_priority
-    BRH #zero, .empty_iteration
-; skip if fulfilled
-    BSR 2
-    SUB @task_priority
-    BRH #zero, .empty_iteration
-; increment task age
-    IMM acc, 0x40
-    ADD @task
-    MST @iterator, .kernel.proc
-; continue
-    IMM acc, 0x0F
-    AND @task
-    RST @task
-    MMU @mmu.pid_register
-    MLD @iterator, 0x41
-    CPS acc
-    IMM acc, .kernel.swap+
+    IMM @stride_location, @stride
+    IMM @iterator_mask, 0x1F
+
+.find_proc_iteration:
+    AST @iterator
+    ADD @stride_location
+    AND @iterator_mask
+    RST @iterator
+; load proc frame
+    MLD @iterator, .kernel.proc!
+    BRH #zero, .find_proc_iteration
+    RST @task_segment
+
+.staged_proc:
+    MLD @iterator, .kernel.proc! 0x01
+    RST @task_metadata
+    // todo:
+    // second stage of process swap, priority indexing
+
+.execute_proc:
+    AST @iterator
+    MST zer, .kernel.proc.swap_index!
+; context store segment
+    IMM acc, .kernel.swap!+
     MMU @mmu.kernel_data_target
-    AST @task
-    BSL 1
+; skip process traceback
+    PPL
+    BRH #zero, .skip_snapshot
+; save call stack head
+    MMU @mmu.pid_load
+    BSL 4
+    RST @context_store_location
+    CPL
+    MST @context_store_location, 0x80
+.&skip_snapshot:
+    IMM acc, 0x0F
+    AND @task_metadata
+    MMU @mmu.pid_register
+; lower address
+    BSL 4
     MLD acc, 0x80
     CPS acc
-    IMM acc, .kernel.restore+
+; upper address
+    CPS @task_segment
+
+; restore context
+    IMM acc, .kernel.restore!+
     MMU @mmu.instruction_target
-    JMP zer, .kernel.restore
-.&empty_iteration:
-    IMM acc, @max_proc
-    SUB @iterator
-    BRH #zero, .reset_iteration_stash
-    IMM acc, @stride
-    ADD @iterator
-    RST @iterator
-    JMP zer, .find_priority_iteration
-.reset_iteration_stash:
-    IMM @age_removal_bits, 0b00111111
-    .reset_iteration:
-        MLD @iterator, .kernel.proc
-        AND @age_removal_bits
-        MST @iterator, .kernel.proc
-    ; decrement iterator
-        IMM acc, @stride
-        SUB @iterator
-        RST @iterator
-        BRH #zero, .find_priority_iteration
-    ; run loop
-        JMP zer, .reset_iteration
+    JMP zer, .kernel.restore!

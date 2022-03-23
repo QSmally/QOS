@@ -44,11 +44,10 @@
 
 ; place parent pid
     MMU @mmu.pid_load
-    MST @new_proc_index, .kernel.proc!
+    MST @new_proc_index, .kernel.proc! 0x01
 ; place target segment
     PPK
-    MST @new_proc_index
-    .kernel.proc! 0x01
+    MST @new_proc_index, .kernel.proc! 0x00
 
 ; snapshot location in context store
     IMM acc, .kernel.swap!+
@@ -64,10 +63,11 @@
     AST @new_proc_index
     BSR 1
     MMU @mmu.pid_register
+
 ; continue
     PPL
     MMU @mmu.instruction_target
-    ; todo:
-    ; implement a type of 'exit_instruction_target'
+    // todo:
+    // implement a type of 'exit_instruction_target'
     MMU @mmu.kernel_exit
     JMP zer, 0x00
