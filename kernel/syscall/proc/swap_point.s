@@ -59,6 +59,7 @@
     IMM acc, 0b00110000
     AND @task_metadata
     BSR 4
+    INC acc
     SUB @cycle_age
     BRH #zero, .find_proc_iteration
 ; increment cycle age
