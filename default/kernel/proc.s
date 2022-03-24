@@ -10,9 +10,8 @@
 // c: priority (cycle max)
 // d: parent pid
 
-.&kernel.proc.main:
+; kernel task
     .os.main+
-.&kernel.proc.swap_index:
-    0x00
+    0b00010000
 ; tasks
     %array 30

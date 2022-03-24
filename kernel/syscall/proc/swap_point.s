@@ -28,7 +28,7 @@
     IMM acc, .kernel.proc!+
     MMU @mmu.kernel_data_target
 ; process index
-    MLD zer, .kernel.proc.swap_index!
+    MLD zer, .kernel.metadata.swap_index!
     RST @iterator
 ; variables and constants
     IMM @stride_location, @stride
@@ -62,14 +62,14 @@
     INC acc
     SUB @cycle_age
     BRH #zero, .find_proc_iteration
-; increment cycle age
+
+; execute process, increment cycle age
     IMM acc, 0b01000000
     ADD @task_metadata
     MST @iterator, .kernel.proc! 0x01
-
-.execute_proc:
+; save swap index
     AST @iterator
-    MST zer, .kernel.proc.swap_index!
+    MST zer, .kernel.metadata.swap_index!
 ; context store segment
     IMM acc, .kernel.swap!+
     MMU @mmu.kernel_data_target
