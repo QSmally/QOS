@@ -1,14 +1,13 @@
-@PAGE 0 2
+@PAGE 0 3
 @ADDRESSABLE kernel.proc
 
 // Two byte stride
 // 0: aaaaaaaa
-// 1: bb.cc.dddd
+// 1: bbb.ccccc
 
 // a: segment address
-// b: cycle age
-// c: priority (cycle max)
-// d: parent pid
+// b: priority
+// c: parent pid
 
 ; kernel task
     .os.main+

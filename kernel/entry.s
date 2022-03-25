@@ -9,18 +9,17 @@
 // automatically and construct the address array for '(kernel_)intermediate_load'.
 
 .swapnt_map:
-    0 ; 0, fork
+    0 ; 0, spawn
     1 ; 1, terminate
-    0 ; 2, swap point
-    0 ; 3, allocate page
+    0 ; 2, yield
+    0 ; 3, schedule
     0 ; 4, allocate segment
-    0 ; 5, drop
+    0 ; 5, drop segment
     0 ; 6, set data target
     0 ; 7, reset data target
     0 ; 8, segment load
     0 ; 9, call
     1 ; 10, return
-    1 ; 11, interrupt return
 
 .main(16):
     PPK
