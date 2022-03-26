@@ -21,5 +21,5 @@
     MST @current_proc_index, .kernel.proc! 0x00
     MST @current_proc_index, .kernel.proc! 0x01
 
-; continue
+; next task
     @GOTO kernel.next_task

@@ -1,113 +1,44 @@
 @PAGE 2 3
-@OVERFLOWABLE
 
 // Switches contexts to another process by rescheduling the current task and
 // selecting a new task from the top of the queue.
 
-// Type: @QOSTRACECALL or @QOS
-// Arguments: 1 if returnable, 0 if not
+// Type: @QOSSUBROUTINE
+// Arguments: empty tuple
 // Returns: empty tuple
 
-@DECLARE iterator 1
-@DECLARE task_segment 2
-@DECLARE task_metadata 3
-@DECLARE stride_location 4
-@DECLARE context_store_location 4
-@DECLARE iterator_mask 5
-@DECLARE cycle_age 7
-@DECLARE cycle_age_reset 6
-@DECLARE clear_age_constant 7
+// TODO:
+// Task priority override as parameter.
 
-@DECLARE stride 2
+@DECLARE queue_head 1
+@DECLARE next_lower_address 2
+@DECLARE stride_constant 3
 
-; main
-    MLD zer, .kernel.nodes.swap_index!
-    RST @iterator
-; variables and constants
-    IMM @stride_location, @stride
-    IMM @iterator_mask, 0b00011111
-    IMM @cycle_age_reset, 0x00
+; reschedule task
+    @CALL kernel.schedule
 
-.&find_proc_iteration:
-    AST @iterator
-    ADD @stride_location
-    AND @iterator_mask
-    RST @iterator
-; swap overflow
-    BRH #zero, .cycle_reset
-    .&load_proc_frame:
-        MLD @iterator, .kernel.proc!
-        BRH #zero, .find_proc_iteration
-        RST @task_segment
-
-.staged_proc:
-    MLD @iterator, .kernel.proc! 0x01
-    RST @task_metadata
-; fetch cycle age
-    IMM acc, 0b11000000
-    AND @task_metadata
-    BSR 6
-    RST @cycle_age
-; compare with cycle priority
-    IMM acc, 0b00110000
-    AND @task_metadata
-    BSR 4
-    INC acc
-    SUB @cycle_age
-    BRH #zero, .find_proc_iteration
-
-; execute process, increment cycle age
-    IMM acc, 0b01000000
-    ADD @task_metadata
-    MST @iterator, .kernel.proc! 0x01
-; save swap index
-    AST @iterator
-    MST zer, .kernel.nodes.swap_index!
-; context store segment
-    IMM acc, .kernel.swap!+
-    MMU @mmu.kernel_data_target
-; skip process traceback
-    PPL
-    BRH #zero, .skip_snapshot
-    ; save call stack head
-        MMU @mmu.pid_load
-        BSL 3
-        RST @context_store_location
-        CPL
-        MST @context_store_location, 0x80
-.&skip_snapshot:
-    AST @iterator
-    BSR 1
-    MMU @mmu.pid_register
+.&kernel.next_task:
+    IMM @stride_constant, 4
+    MLD zer, .kernel.nodes.queue_head!
+    RST @queue_head
 ; lower address
-    BSL 3
-    MLD acc, 0x80
+    MLD acc, .kernel.task_queue! 0x01
     CPS acc
-; upper address
-    CPS @task_segment
-
-; restore context
-    IMM acc, .kernel.restore!+
+; pid
+    MLD @queue_head, .kernel.task_queue! 0x02
+    BSR 4
+    MMU @mmu.pid_register
+; segment address
+    MLD @queue_head, .kernel.task_queue! 0x00
+    CPS acc
+; clear byte
+    CLR
+    MST @queue_head, .kernel.task_queue! 0x02
+; decrement queue frame pointer
+    AST @queue_head
+    SUB @stride_constant
+    MST zer, .kernel.nodes.queue_head!
+; continue
+    IMM acc, .kernel.restore+
     MMU @mmu.instruction_target
-    JMP zer, .kernel.restore!
-
-.&cycle_reset:
-    AST @cycle_age_reset
-    BRH #!zero, .reset_counter_head
-    ; set validation bit
-        IMM @cycle_age_reset, 0x01
-        JMP zer, .load_proc_frame
-    .reset_counter_head:
-        IMM @clear_age_constant, 0b00111111
-    .reset_counter_loop:
-        MLD @iterator, .kernel.proc! 0x01
-        AND @clear_age_constant
-        MST @iterator, .kernel.proc! 0x01
-    ; increment iterator
-        AST @iterator
-        ADD @stride_location
-        AND @iterator_mask
-        RST @iterator
-    ; optional continue
-        BRH #!zero, .reset_counter_loop
-        JMP zer, .load_proc_frame
+    @GOTO kernel.restore

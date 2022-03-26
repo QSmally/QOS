@@ -6,7 +6,7 @@
 @DECLARE string_iterator 1
 
 ; main
-    IMM @string_iterator, .qosstring
+    IMM @string_iterator, .qos_string
 .load_char:
     MLD @string_iterator, 0
     BRH #!zero, .print_char
@@ -20,7 +20,6 @@
     INC @string_iterator
     JMP zer, .load_char
 
-.qosstring:
+.qos_string:
     $QOS, 0x0A
-    $login >
     0x00

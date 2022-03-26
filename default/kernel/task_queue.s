@@ -14,4 +14,10 @@
 // d: priority
 // e: task data byte
 
-%array 96
+.&kernel.task_queue.default_head:
+    .os.main+
+    .os.main-
+    0x05
+    0x00
+; tasks
+    %array 92
