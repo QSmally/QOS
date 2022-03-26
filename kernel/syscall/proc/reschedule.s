@@ -1,13 +1,10 @@
 @PAGE 2 3
 @OVERFLOWABLE
 
-// Switches contexts to another process, depends on the process cycle age and
-// priority. It uses a round robin-like process scheduling algorithm which adds
-// task priority.
+// Switches contexts to another process by rescheduling the current task and
+// selecting a new task from the top of the queue.
 
-// Preemptive, round-robin, priority based
-
-// Type: returnable or not-returnable (@QOSTRACECALL or @QOS)
+// Type: @QOSTRACECALL or @QOS
 // Arguments: 1 if returnable, 0 if not
 // Returns: empty tuple
 
@@ -24,10 +21,7 @@
 @DECLARE stride 2
 
 ; main
-    IMM acc, .kernel.proc!+
-    MMU @mmu.kernel_data_target
-; process index
-    MLD zer, .kernel.metadata.swap_index!
+    MLD zer, .kernel.nodes.swap_index!
     RST @iterator
 ; variables and constants
     IMM @stride_location, @stride
@@ -68,7 +62,7 @@
     MST @iterator, .kernel.proc! 0x01
 ; save swap index
     AST @iterator
-    MST zer, .kernel.metadata.swap_index!
+    MST zer, .kernel.nodes.swap_index!
 ; context store segment
     IMM acc, .kernel.swap!+
     MMU @mmu.kernel_data_target

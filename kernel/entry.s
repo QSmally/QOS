@@ -8,11 +8,11 @@
 // configure the address for the ENT instruction, generate an MMU enumeration
 // automatically and construct the address array for '(kernel_)intermediate_load'.
 
-.swapnt_map:
+.swapnt_map(0):
     0 ; 0, spawn
     1 ; 1, terminate
-    0 ; 2, yield
-    0 ; 3, schedule
+    0 ; 2, reschedule
+    0 ; 3, create task
     0 ; 4, allocate segment
     0 ; 5, drop segment
     0 ; 6, set data target
@@ -24,8 +24,11 @@
 .main(16):
     PPK
     MLD acc, .swapnt_map
-    BRH #!zero, .syscall
+    BRH #!zero, .data_target
     @CALL kernel.swap
-.syscall:
+.data_target:
+    IMM acc, .kernel.nodes!+
+    MMU @mmu.kernel_data_target
+; system call
     PPL
     MMU @mmu.kernel_intermediate_load

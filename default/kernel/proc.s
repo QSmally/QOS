@@ -3,7 +3,7 @@
 
 // Two byte stride
 // 0: aaaaaaaa
-// 1: bbb.ccccc
+// 1: bbbb.cccc
 
 // a: segment address
 // b: priority

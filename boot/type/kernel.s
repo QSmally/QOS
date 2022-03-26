@@ -1,8 +1,8 @@
 @ENUM kernel
     @DECLARE spawn 0
     @DECLARE terminate 1
-    @DECLARE yield 2
-    @DECLARE schedule_task 3
+    @DECLARE reschedule 2
+    @DECLARE create_task 3
 
     @DECLARE allocate_segment 4
     @DECLARE drop_segment 5

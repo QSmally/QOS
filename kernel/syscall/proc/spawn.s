@@ -5,7 +5,7 @@
 // kernel call should be called with the snapshot QOS header, as its context and
 // application address will be stored as a snapshot.
 
-// Type: returnable (@QOSTRACECALL)
+// Type: @QOSTRACECALL
 // Arguments: segment address
 // Returns: empty tuple
 
@@ -18,10 +18,7 @@
 @DECLARE stride 2
 
 ; main
-    IMM acc, .kernel.proc!+
-    MMU @mmu.kernel_data_target
     PRF .kernel.proc!-
-; register init
     IMM @stride_location, @stride
     IMM @new_proc_index, 0
 
@@ -49,15 +46,8 @@
     PPK
     MST @new_proc_index, .kernel.proc! 0x00
 
-; snapshot location in context store
-    IMM acc, .kernel.swap!+
-    MMU @mmu.kernel_data_target
-; save call stack head
-    MMU @mmu.pid_load
-    BSL 3
-    RST @context_store_location
-    CPL
-    MST @context_store_location, 0x80
+; reschedule old task
+    // TODO: reschedule old task
 
 ; configure new pid
     AST @new_proc_index
@@ -67,7 +57,5 @@
 ; continue
     PPL
     MMU @mmu.instruction_target
-    // todo:
-    // implement a type of 'exit_instruction_target'
     MMU @mmu.kernel_exit
     JMP zer, 0x00

@@ -10,7 +10,7 @@
 
 // a: segment address
 // b: lower address
-// c: pid reference
+// c: pid
 // d: priority
 // e: task data byte
 
