@@ -11,10 +11,10 @@
     MLD @string_iterator, 0
     BRH #!zero, .print_char
 ; start os
-    IMM acc, .os.main+
+    IMM acc, .os.login+
     MMU @mmu.instruction_target
     MMU @mmu.kernel_exit
-    JMP zer, .os.main
+    @GOTO os.login
 .print_char:
     PST zer, @port.io
     INC @string_iterator

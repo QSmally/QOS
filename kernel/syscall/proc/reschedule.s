@@ -31,9 +31,6 @@
 ; segment address
     MLD @queue_head, .kernel.task_queue! 0x00
     CPS acc
-; clear byte
-    CLR
-    MST @queue_head, .kernel.task_queue! 0x02
 ; decrement queue frame pointer
     AST @queue_head
     SUB @stride_constant

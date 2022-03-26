@@ -15,8 +15,8 @@
 // e: task data byte
 
 .&kernel.task_queue.default_head:
-    .os.main+
-    .os.main-
+    .os.lifecycle_task+
+    .os.lifecycle_task-
     0x05
     0x00
 ; tasks

@@ -10,7 +10,7 @@
 // c: parent pid
 
 ; kernel task
-    .os.main+
+    .os.lifecycle_task+
     0b00010000
 ; tasks
     %array 30
