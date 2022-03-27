@@ -19,7 +19,7 @@
 
 .&kernel.next_task:
     IMM @stride_constant, 4
-    MLD zer, .kernel.nodes.queue_head!
+    MLD zer, .kernel.nodes.task_queue_head!
     RST @queue_head
 ; lower address
     MLD acc, .kernel.task_queue! 0x01
@@ -34,7 +34,7 @@
 ; decrement queue frame pointer
     AST @queue_head
     SUB @stride_constant
-    MST zer, .kernel.nodes.queue_head!
+    MST zer, .kernel.nodes.task_queue_head!
 ; continue
     IMM acc, .kernel.restore+
     MMU @mmu.instruction_target

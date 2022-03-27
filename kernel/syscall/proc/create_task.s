@@ -4,10 +4,19 @@
 // by using the 'interrupt return' system call.
 
 // Type: @QOSSUBROUTINE
-// Arguments: priority, segment address, lower address
+// Arguments: segment address, lower address
 // Returns: empty tuple
 
-; return
+@DECLARE segment_address 1
+
+; main
+    PPL
+    RST @segment_address
+    PPL
+    CPS acc
+    CPS @segment_address
+    @CALL kernel.schedule
+; continue
     IMM acc, .kernel.restore+
     MMU @mmu.instruction_target
     @GOTO kernel.restore

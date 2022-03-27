@@ -18,7 +18,7 @@
     IMM @stride_constant, 4
 
 ; shift queue
-    MLD zer, .kernel.nodes.queue_head!
+    MLD zer, .kernel.nodes.task_queue_head!
     RST @shift_pointer
     ADD @stride_constant
     RST @shift_destination_pointer
@@ -53,8 +53,8 @@
     CPL
     MST @insertion_pointer, 0x01
 ; increment head frame pointer
-    MLD zer, .kernel.nodes.queue_head!
+    MLD zer, .kernel.nodes.task_queue_head!
     ADD @stride_constant
-    MST zer, .kernel.nodes.queue_head!
+    MST zer, .kernel.nodes.task_queue_head!
 ; return
     JMP @return_pointer, 0

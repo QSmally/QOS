@@ -19,5 +19,10 @@
     .os.lifecycle_task-
     0x05
     0x00
-; tasks
+; default login task
+    .os.login+
+    .os.login-
+    0x05
+    0x00
+; other tasks
     %array 92
