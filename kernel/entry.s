@@ -12,14 +12,16 @@
     0 ; 0, spawn
     1 ; 1, terminate
     0 ; 2, reschedule
-    0 ; 3, create task
-    0 ; 4, allocate segment
-    0 ; 5, drop segment
-    0 ; 6, set data target
-    0 ; 7, reset data target
-    0 ; 8, segment load
-    0 ; 9, call
-    1 ; 10, return
+    0 ; 3, interrupt
+    0 ; 4, create task
+    1 ; 5, task return
+    0 ; 6, allocate segment
+    0 ; 7, drop segment
+    0 ; 8, set data target
+    0 ; 9, reset data target
+    0 ; 10, segment load
+    0 ; 11, call
+    1 ; 12, return
 
 .main(16):
     PPK
