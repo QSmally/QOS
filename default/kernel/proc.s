@@ -12,5 +12,8 @@
 ; kernel task
     .os.lifecycle_task+
     0b00010000
+; login task
+    .os.login+
+    0b00010000
 ; tasks
-    %array 30
+    %array 28

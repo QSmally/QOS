@@ -13,6 +13,8 @@
 ; start os
     IMM acc, .os.login+
     MMU @mmu.instruction_target
+    IMM acc, 0x01
+    MMU @mmu.pid_register
     MMU @mmu.kernel_exit
     @GOTO os.login
 .print_char:

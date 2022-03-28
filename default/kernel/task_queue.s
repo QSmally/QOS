@@ -14,15 +14,10 @@
 // d: priority
 // e: task data byte
 
-.&kernel.task_queue.default_head:
+.&kernel.task_queue.empty_address:
     .os.lifecycle_task+
     .os.lifecycle_task-
     0x05
     0x00
-; default login task
-    .os.login+
-    .os.login-
-    0x05
-    0x00
-; other tasks
+.&kernel.task_queue.default_head:
     %array 92

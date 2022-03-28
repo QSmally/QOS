@@ -19,11 +19,13 @@
 
 ; shift queue
     MLD zer, .kernel.nodes.task_queue_head!
-    RST @shift_pointer
-    ADD @stride_constant
     RST @shift_destination_pointer
+    SUB @stride_constant
+    RST @shift_pointer
 ; insertion pointer
-    IMM @insertion_pointer, .kernel.task_queue.default_head!
+    IMM @insertion_pointer, .kernel.task_queue.empty_address!
+    SUB @shift_destination_pointer
+    BRH #zero, .insert_frame
     .&shift_frame_iteration:
         MLD @shift_pointer, 0x00
         MST @shift_destination_pointer, 0x00
