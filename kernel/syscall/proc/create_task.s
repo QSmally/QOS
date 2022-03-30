@@ -4,7 +4,7 @@
 // by using the 'interrupt return' system call.
 
 // Type: @QOSSUBROUTINE
-// Arguments: segment address, lower address
+// Arguments: segment address, lower address, task priority
 // Returns: empty tuple
 
 @DECLARE segment_address 1

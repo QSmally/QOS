@@ -35,6 +35,7 @@
     MST @new_proc_index, .kernel.proc! 0x00
 
 ; schedule old task
+    PPI, 5
     @CALL kernel.schedule
 
 ; configure new pid

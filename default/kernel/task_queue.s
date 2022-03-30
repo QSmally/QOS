@@ -10,14 +10,14 @@
 
 // a: segment address
 // b: lower address
-// c: pid
-// d: priority
+// c: priority
+// d: pid
 // e: task data byte
 
 .&kernel.task_queue.empty_address:
     .os.lifecycle_task+
     .os.lifecycle_task-
-    0x05
+    0xA0
     0x00
 .&kernel.task_queue.default_head:
     %array 92

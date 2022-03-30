@@ -14,6 +14,7 @@
 @DECLARE stride_constant 1
 
 ; reschedule task
+    PPI, 5
     @CALL kernel.schedule
 
 .&kernel.next_task:
