@@ -14,7 +14,11 @@
 @DECLARE stride_constant 1
 
 ; reschedule task
-    PPI, 5
+    MMU @mmu.pid_load
+    BSL 1
+    MLD acc, .kernel.proc! 0x01
+    BSR 4
+    PPS acc
     @CALL kernel.schedule
 
 .&kernel.next_task:
