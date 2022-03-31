@@ -6,8 +6,11 @@
 // Arguments: task priority
 // Returns: empty tuple
 
+// TODO:
+// Fix a task being executed twice when in a loop of two tasks.
+
 @DECLARE return_pointer 2
-@DECLARE insertion_priority 3
+@DECLARE priority 3
 @DECLARE insertion_pointer 4
 @DECLARE shift_pointer 5
 @DECLARE shift_destination_pointer 6
@@ -16,8 +19,6 @@
 ; main
     CPL
     RST @return_pointer
-    PPL
-    RST @insertion_priority
     IMM @stride_constant, 4
 
 ; queue pointers
@@ -32,11 +33,13 @@
 .find_target_iteration:
     MLD @insertion_pointer, 0x02
     BSR 4
-    SUB @insertion_priority
-    BRH #!signed, .shift_frame_iteration
+    RST @priority
+    PPK
+    SUB @priority
+    BRH #signed, .shift_frame_iteration
 ; increment skipped task's priority
-    ADD @insertion_priority
-    INC acc
+    INC @priority
+    BSL 4
     MST @insertion_pointer, 0x02
 ; increment insertion pointer
     AST @insertion_pointer
@@ -45,6 +48,7 @@
 ; continue if elements ahead
     SUB @shift_destination_pointer
     BRH #!zero, .find_target_iteration
+    JMP zer, .insert_frame
 
 .&shift_frame_iteration:
     MLD @shift_pointer, 0x00
@@ -74,7 +78,7 @@
     MST @insertion_pointer, 0x00
     CPL
     MST @insertion_pointer, 0x01
-    AST @insertion_priority
+    PPL
     BSL 4
     MST @insertion_pointer, 0x02
 ; increment head frame pointer
