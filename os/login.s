@@ -6,20 +6,22 @@
 
 ; main
     IMM @string_iterator, .login_string
+    PST zer, @port.terminal_newline
 .print_char:
     MLD @string_iterator, 0
     BRH #zero, .accept_input
 ; print character
-    PST zer, @port.io
+    PST zer, @port.terminal_push
     INC @string_iterator
     JMP zer, .print_char
 .accept_input:
-    PPI, @interrupt.keypress
-    @QOSSUBROUTINE @kernel.interrupt
+    PLD zer, @port.terminal
+    BRH #zero, .continue
+    PST zer, @port.terminal_push
+.continue:
+    @QOSSUBROUTINE @kernel.reschedule
+    @GOTO accept_input
 
 .login_string:
     $login, 0x20, $>
-    0x00
-.passwd_string:
-    $password, 0x20, $>
     0x00
