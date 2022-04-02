@@ -18,6 +18,7 @@
     PLD zer, @port.terminal
     BRH #zero, .continue
     PST zer, @port.terminal_push
+    @GOTO accept_input
 .continue:
     @QOSSUBROUTINE @kernel.reschedule
     @GOTO accept_input
