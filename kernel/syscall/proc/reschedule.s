@@ -15,8 +15,8 @@
 
 ; reschedule task
     MMU @mmu.pid_load
-    BSL 1
-    MLD acc, .kernel.proc! 0x01
+    BSL 1, FWD
+    MLD zer, .kernel.proc! 0x01
     BSR 4
     PPS acc
     @CALL kernel.schedule

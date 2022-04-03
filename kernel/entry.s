@@ -24,8 +24,8 @@
     1 ; 12, return
 
 .main(16):
-    PPK
-    MLD acc, .swapnt_map
+    PPK, FWD
+    MLD zer, .swapnt_map
     BRH #!zero, .data_target
     @CALL kernel.swap
 .data_target:
