@@ -25,7 +25,7 @@
 
 .main(16):
     PPK, FWD
-    MLD zer, .swapnt_map
+    MLD fwd, .swapnt_map
     BRH #!zero, .data_target
     @CALL kernel.swap
 .data_target:

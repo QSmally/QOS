@@ -14,4 +14,4 @@
     MMU @mmu.instruction_target
     MMU @mmu.kernel_exit
     PPL, FWD
-    JMP zer, 0
+    JMP fwd, 0
