@@ -2,8 +2,8 @@
 @ADDRESSABLE os.login
 @OVERFLOWABLE
 
-@DECLARE enter_key 1
-@DECLARE string_iterator 2
+@DECLARE string_iterator 1
+@DECLARE enter_key 2
 @DECLARE key 3
 
 ; main
