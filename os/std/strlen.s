@@ -8,18 +8,17 @@
 // Returns: array length
 
 @DECLARE location 1
-@DECLARE count 2
+@DECLARE start_location 2
 
 ; main
     PPL
     RST @location
-    IMM @count, 0
-.byte_loop:
-    MLD @location, 0
-    BRH #zero, .return
-    INC @location
-    INC @count
-    JMP zer, .byte_loop
-.return:
-    PPS @count
+    RST @start_location
+.loop:
+    MLI @location, 0
+    BRH #!zero, .loop
+; return
+    DEC @location
+    SUB @start_location
+    PPS acc
     @QOS @kernel.return

@@ -21,10 +21,9 @@
     RST @source_location
     JMP zer, .first_iteration_loop
 .loop:
-    INC @source_location
     INC @copy_location
 .first_iteration_loop:
-    MLD @source_location, 0
+    MLI @source_location, 0
     MST @copy_location, 0
     BRH #!zero, .loop
 ; return

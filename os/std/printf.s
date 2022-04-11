@@ -14,10 +14,8 @@
     PPL
     RST @location
 .print_loop:
-    MLD @location, 0
-    BRH #zero, .return
+    MLI @location, 0
     PRT zer, @port.io
-    INC @location
-    JMP zer, .print_loop
-.return:
+    BRH #!zero, .print_loop
+; return
     @QOS @kernel.return

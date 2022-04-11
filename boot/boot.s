@@ -8,8 +8,9 @@
 ; main
     IMM @string_iterator, .qos_string
 .load_char:
-    MLD @string_iterator, 0
-    BRH #!zero, .print_char
+    MLI @string_iterator, 0
+    PRT zer, @port.terminal_push
+    BRH #!zero, .load_char
 ; start os
     IMM acc, .os.login+
     MMU @mmu.instruction_target
@@ -17,10 +18,6 @@
     MMU @mmu.pid_register
     MMU @mmu.kernel_exit
     @GOTO os.login
-.print_char:
-    PRT zer, @port.terminal_push
-    INC @string_iterator
-    JMP zer, .load_char
 
 .qos_string:
     $QOS, 0x0A

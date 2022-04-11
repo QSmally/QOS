@@ -16,14 +16,13 @@
     PPL
     RST @character
 .loop:
-    MLD @location, 0
+    MLI @location, 0
     BRH #zero, .not_found
     SUB @character
-    BRH #zero, .found
-    INC @location
-    JMP zero, .loop
-.found:
-    PPS @location
+    BRH #!zero, .loop
+; found
+    DEC @location
+    PPS acc
     @QOS @kernel.return
 .not_found:
     PPI, 0x00
