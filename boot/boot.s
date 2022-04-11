@@ -18,7 +18,7 @@
     MMU @mmu.kernel_exit
     @GOTO os.login
 .print_char:
-    PST zer, @port.terminal_push
+    PRT zer, @port.terminal_push
     INC @string_iterator
     JMP zer, .load_char
 
