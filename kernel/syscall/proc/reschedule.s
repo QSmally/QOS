@@ -21,7 +21,7 @@
     PPS acc
     @CALL kernel.schedule
 
-.&kernel.next_task:
+.&kernel.next_task(9):
     IMM @stride_constant, 4
     MLD zer, .kernel.nodes.task_queue_head!
     SUB @stride_constant

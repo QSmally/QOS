@@ -1,4 +1,4 @@
-@PAGE 2 6
+@PAGE 2 5
 @ADDRESSABLE kernel.schedule
 @OVERFLOWABLE
 
