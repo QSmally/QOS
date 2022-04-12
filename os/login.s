@@ -2,9 +2,12 @@
 @ADDRESSABLE os.login
 @OVERFLOWABLE
 
+@MAKEPAGE input_information 5 4
+
 @DECLARE string_iterator 1
-@DECLARE enter_key 2
-@DECLARE key 3
+@DECLARE insertion_pointer 2
+@DECLARE enter_key 3
+@DECLARE key 4
 
 ; main
     PRT zer, @port.terminal_newline
@@ -12,17 +15,19 @@
 ; login username
     PPI, 1
     IMM @string_iterator, .login_string
+    IMM @insertion_pointer, 0x80
     CAL zer, .print_char
 ; login password
     PRT zer, @port.terminal_newline
     PPI, 0
     IMM @string_iterator, .passwd_string
+    IMM @insertion_pointer, 0x90
     CAL zer, .print_char
 ; postlogin task
     PRT zer, @port.terminal_newline
     @QOS @kernel.terminate
 
-.print_char:
+.&print_char:
     MLD @string_iterator, 0
     BRH #zero, .accept_input
 ; print character
@@ -36,6 +41,10 @@
     RST @key
     SUB @enter_key
     BRH #zero, .return
+; add to memory
+    AST @key
+    MST @insertion_pointer, 0
+    INC @insertion_pointer
 ; optionally print character
     PPK
     BRH #zero, .accept_input
