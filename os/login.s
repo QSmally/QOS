@@ -33,7 +33,7 @@
 ; print character
     PRT zer, @port.terminal_push
     INC @string_iterator
-    JMP zer, .print_char
+    @GOTO print_char
 
 .&accept_input:
     PRT zer, @port.terminal_request
