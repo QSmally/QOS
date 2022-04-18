@@ -11,7 +11,7 @@
 @DECLARE segment_address 1
 
 ; main
-    PRF .kernel.proc-
+    @PREFETCH kernel.proc!
 
 ; generate address
     MMU @mmu.pid_load

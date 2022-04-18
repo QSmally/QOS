@@ -16,7 +16,7 @@
 @DECLARE stride_constant 2
 
 ; main
-    PRF .kernel.proc!-
+    @PREFETCH kernel.proc!
     IMM @new_proc_index, 0
     IMM @stride_constant, 2
 

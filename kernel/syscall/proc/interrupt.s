@@ -11,7 +11,7 @@
 @DECLARE stride_constant 2
 
 ; main
-    PRF .kernel.interrupts!-
+    @PREFETCH kernel.interrupts!
     IMM @new_int_index, 0
     IMM @stride_constant, 2
 
