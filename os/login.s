@@ -40,8 +40,11 @@
     BRH #zero, .accept_input
     RST @key
     SUB @enter_key
-    BRH #zero, .return
-; add to memory
+    BRH #!zero, .add_memory
+; return
+    PPL
+    @RETURN
+.add_memory:
     AST @key
     MST @insertion_pointer, 0
     INC @insertion_pointer
@@ -51,9 +54,6 @@
     AST @key
     PRT zer, @port.terminal_push
     @GOTO accept_input
-.&return:
-    PPL
-    @RETURN
 
 .&login_string:
     $login, 0x20, $>
