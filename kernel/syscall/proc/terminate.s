@@ -19,8 +19,8 @@
     RST @current_proc_index
 ; remove entry
     IMM acc, 0
-    MST @current_proc_index, .kernel.proc! 0x00
-    MST @current_proc_index, .kernel.proc! 0x01
+    MST @current_proc_index, .kernel.proc! + 0x00
+    MST @current_proc_index, .kernel.proc! + 0x01
 
 ; next task
     @GOTO kernel.next_task

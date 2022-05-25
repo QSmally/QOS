@@ -16,7 +16,7 @@
 ; reschedule task
     MMU @mmu.pid_load
     BSL 1, FWD
-    MLD fwd, .kernel.proc! 0x01
+    MLD fwd, .kernel.proc! + 0x01
     BSR 4
     PPS acc
     @CALL kernel.schedule
@@ -28,14 +28,14 @@
     RST @queue_head
     MST zer, .kernel.nodes.task_queue_head!
 ; lower address
-    MLD @queue_head, .kernel.task_queue! 0x01
+    MLD @queue_head, .kernel.task_queue! + 0x01
     CPS acc
 ; pid
-    MLD @queue_head, .kernel.task_queue! 0x02
+    MLD @queue_head, .kernel.task_queue! + 0x02
     BSR 4
     MMU @mmu.pid_register
 ; segment address
-    MLD @queue_head, .kernel.task_queue! 0x00
+    MLD @queue_head, .kernel.task_queue! + 0x00
     CPS acc
 ; continue
     IMM acc, .kernel.restore+

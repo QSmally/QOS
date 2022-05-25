@@ -16,19 +16,26 @@
     BSL 3
     RST @base_location
 ; swap
-    MLD @base_location, 0x87
+    MLD @base_location
+    @base_context_store | 0x07
     RST 7
-    MLD @base_location, 0x86
+    MLD @base_location
+    @base_context_store | 0x06
     RST 6
-    MLD @base_location, 0x85
+    MLD @base_location
+    @base_context_store | 0x05
     RST 5
-    MLD @base_location, 0x84
+    MLD @base_location
+    @base_context_store | 0x04
     RST 4
-    MLD @base_location, 0x83
+    MLD @base_location
+    @base_context_store | 0x03
     RST 3
-    MLD @base_location, 0x82
+    MLD @base_location
+    @base_context_store | 0x02
     RST 2
-    MLD @base_location, 0x81
+    MLD @base_location
+    @base_context_store | 0x01
     RST 1
 ; return
     CPL

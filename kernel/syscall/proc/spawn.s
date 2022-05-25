@@ -29,10 +29,10 @@
 
 ; place parent pid
     MMU @mmu.pid_load
-    MST @new_proc_index, .kernel.proc! 0x01
+    MST @new_proc_index, .kernel.proc! + 0x01
 ; place target segment
     PPK
-    MST @new_proc_index, .kernel.proc! 0x00
+    MST @new_proc_index, .kernel.proc! + 0x00
 
 ; schedule old task
     PPI, 5

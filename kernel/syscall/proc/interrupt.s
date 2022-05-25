@@ -16,7 +16,7 @@
     IMM @stride_constant, 2
 
 .find_empty_iteration:
-    MLD @new_int_index, .kernel.interrupts! 0x00
+    MLD @new_int_index, .kernel.interrupts! + 0x00
     BRH #zero, .add_interrupt
 ; increment frame pointer
     AST @new_int_index
@@ -26,13 +26,13 @@
 
 .add_interrupt:
     PPL
-    MST @new_int_index, .kernel.interrupts! 0x00
+    MST @new_int_index, .kernel.interrupts! + 0x00
 ; segment address
     CPL
-    MST @new_int_index, .kernel.interrupts! 0x01
+    MST @new_int_index, .kernel.interrupts! + 0x01
 ; lower address
     CPL
-    MST @new_int_index, .kernel.interrupts! 0x02
+    MST @new_int_index, .kernel.interrupts! + 0x02
 
 ; next task
     @GOTO kernel.next_task
