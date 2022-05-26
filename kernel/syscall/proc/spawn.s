@@ -6,11 +6,16 @@
 // application address will be stored as a snapshot.
 
 // Type: @QOSSUBROUTINE
-// Arguments: segment address, reschedule
+// Arguments: segment address, action
 // Returns: empty tuple
 
 // TODO:
 // Filesystem permissions.
+
+// Action:
+// 0x00: no reschedule
+// 0x01: reschedule self
+// 0x02: terminate self (todo)
 
 @DECLARE reschedule 1
 @DECLARE stride_constant 2

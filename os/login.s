@@ -23,9 +23,12 @@
     IMM @string_iterator, .passwd_string
     IMM @insertion_pointer, 0x90
     CAL zer, .print_char
+
 ; postlogin task
     PRT zer, @port.terminal_newline
-    @QOS @kernel.terminate
+    PPI, .os.shell+
+    PPI, 0x00
+    @QOS @kernel.spawn
 
 .&print_char:
     MLD @string_iterator, 0
