@@ -1,21 +1,25 @@
 @PAGE 2 0
+@OVERFLOWABLE
 
 // Spawns a new process and immediately starts executing the zero-page of it. This
 // kernel call should be called with the snapshot QOS header, as its context and
 // application address will be stored as a snapshot.
 
 // Type: @QOSSUBROUTINE
-// Arguments: segment address
+// Arguments: segment address, reschedule
 // Returns: empty tuple
 
 // TODO:
 // Filesystem permissions.
 
-@DECLARE stride_constant 1
+@DECLARE reschedule 1
+@DECLARE stride_constant 2
 @DECLARE new_proc_index 7
 
 ; main
     @PREFETCH kernel.proc!
+    PPL
+    RST @reschedule
     IMM @stride_constant, 2
     IMM @new_proc_index, 0
 
@@ -33,11 +37,13 @@
     PPK
     MST @new_proc_index, .kernel.proc! + 0x00
 
-; schedule old task
+; optionally schedule old task
+    AST @reschedule
+    BRH #zero, .configure_pid
     PPI, 5
     @CALL kernel.schedule
 
-; configure new pid
+.configure_pid:
     AST @new_proc_index
     BSR 1
     MMU @mmu.pid_register
