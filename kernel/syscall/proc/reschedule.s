@@ -10,8 +10,8 @@
 // TODO:
 // Task priority override as parameter.
 
-@DECLARE queue_head 1
 @DECLARE stride_constant 1
+@DECLARE queue_head 7
 
 ; reschedule task
     MMU @mmu.pid_load

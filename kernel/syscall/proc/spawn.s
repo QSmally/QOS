@@ -1,5 +1,4 @@
 @PAGE 2 0
-@OVERFLOWABLE
 
 // Spawns a new process and immediately starts executing the zero-page of it. This
 // kernel call should be called with the snapshot QOS header, as its context and
@@ -12,13 +11,13 @@
 // TODO:
 // Filesystem permissions.
 
-@DECLARE new_proc_index 1
-@DECLARE stride_constant 2
+@DECLARE stride_constant 1
+@DECLARE new_proc_index 7
 
 ; main
     @PREFETCH kernel.proc!
-    IMM @new_proc_index, 0
     IMM @stride_constant, 2
+    IMM @new_proc_index, 0
 
 .find_empty_iteration:
     AST @new_proc_index

@@ -9,12 +9,12 @@
 // TODO:
 // Fix a task being executed twice when in a loop of two tasks.
 
-@DECLARE return_pointer 2
-@DECLARE priority 3
-@DECLARE insertion_pointer 4
-@DECLARE shift_pointer 5
-@DECLARE shift_destination_pointer 6
-@DECLARE stride_constant 7
+@DECLARE return_pointer 1
+@DECLARE priority 2
+@DECLARE insertion_pointer 3
+@DECLARE shift_pointer 4
+@DECLARE shift_destination_pointer 5
+@DECLARE stride_constant 6
 
 ; main
     CPL
