@@ -6,29 +6,32 @@
 
 @DECLARE string_iterator 1
 @DECLARE insertion_pointer 2
-@DECLARE enter_key 3
-@DECLARE key 4
+@DECLARE showing_input 3
+@DECLARE enter_key 4
+@DECLARE key 5
 
 ; main
-    PRT zer, @port.terminal_newline
     IMM @enter_key, 0x0A
 ; login username
-    PPI, 1
     IMM @string_iterator, .login_string
     IMM @insertion_pointer, 0x80
+    IMM @showing_input, 1
     CAL zer, .print_char
 ; login password
     PRT zer, @port.terminal_newline
-    PPI, 0
     IMM @string_iterator, .passwd_string
     IMM @insertion_pointer, 0x90
+    IMM @showing_input, 0
     CAL zer, .print_char
 
 ; postlogin task
     PRT zer, @port.terminal_newline
     PPI, .os.shell+
-    PPI, 0x00
+    PPI, 0
     @QOS @kernel.spawn
+
+; terminate login process
+    @QOS @kernel.terminate
 
 .&print_char:
     MLD @string_iterator, 0
@@ -43,20 +46,19 @@
     BRH #zero, .accept_input
     RST @key
     SUB @enter_key
-    BRH #!zero, .add_memory
-; return
-    PPL
-    @RETURN
-.add_memory:
+    BRH #zero, .return
+; append to memory
     AST @key
-    MST @insertion_pointer, 0
+    MST @insertion_pointer, 0x00
     INC @insertion_pointer
 ; optionally print character
-    PPK
+    AST @showing_input
     BRH #zero, .accept_input
     AST @key
     PRT zer, @port.terminal_push
     @GOTO accept_input
+.return:
+    @RETURN
 
 .&login_string:
     $login, 0x20, $>

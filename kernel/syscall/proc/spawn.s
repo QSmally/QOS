@@ -5,7 +5,7 @@
 // kernel call should be called with the snapshot QOS header, as its context and
 // application address will be stored as a snapshot.
 
-// Type: @QOSSUBROUTINE
+// Type: @QOSSUBROUTINE, @QOS
 // Arguments: segment address, action
 // Returns: empty tuple
 
@@ -54,7 +54,11 @@
     MMU @mmu.pid_register
 
 ; continue
+; TODO:
+; Somehow, if there's no NOP (or any instruction) here, the emulator crashes.
+; It probably has to do with invalidating the instruction cache.
     PPL
+    NOP
     MMU @mmu.instruction_target
     MMU @mmu.kernel_exit
     JMP zer, 0x00

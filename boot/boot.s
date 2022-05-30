@@ -12,6 +12,7 @@
     PRT zer, @port.terminal_push
     BRH #!zero, .load_char
 ; start os
+    PRT zer, @port.terminal_newline
     IMM acc, .os.login+
     MMU @mmu.instruction_target
     IMM acc, 0x01
