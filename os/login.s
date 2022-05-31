@@ -2,34 +2,59 @@
 @ADDRESSABLE os.login
 @OVERFLOWABLE
 
-@MAKEPAGE input_information 5 4
+@MAKEPAGE input_information 5 5
 
 @DECLARE string_iterator 1
 @DECLARE insertion_pointer 2
 @DECLARE showing_input 3
-@DECLARE enter_key 4
-@DECLARE key 5
+@DECLARE key 4
+@DECLARE target_passwd_string 5
+@DECLARE input_passwd_string 6
+@DECLARE target_char 7
 
-; main
-    IMM @enter_key, 0x0A
+@DECLARE username_loc 0xA0
+@DECLARE passwd_loc 0xB0
+
 ; login username
+.&escape:
+    PRT zer, @port.terminal_newline
     IMM @string_iterator, .login_string
-    IMM @insertion_pointer, 0x80
+    IMM @insertion_pointer, @username_loc
     IMM @showing_input, 1
     CAL zer, .print_char
 ; login password
-    PRT zer, @port.terminal_newline
     IMM @string_iterator, .passwd_string
-    IMM @insertion_pointer, 0x90
+.&retry:
+    PRT zer, @port.terminal_newline
+    IMM @insertion_pointer, @passwd_loc
     IMM @showing_input, 0
     CAL zer, .print_char
 
-; postlogin task
+; TODO:
+; fetch user password,
+; use strcmp kernel subroutine with stack as argument.
+    IMM @target_passwd_string, .passwd_preview_string
+    IMM @input_passwd_string, @passwd_loc
+.compare_char:
+    MLI @target_passwd_string, 0x00
+    RST @target_char
+    MLI @input_passwd_string, 0x00
+; if equal
+    SUB @target_char
+    BRH #!zero, .retry_passwd
+; if string terminator
+    PRT zer, @port.terminal_push
+    AST @target_char
+    BRH #zero, .spawn_shell
+.&retry_passwd:
+    IMM @string_iterator, .retry_passwd_string
+    @GOTO retry
+
+.spawn_shell:
     PRT zer, @port.terminal_newline
     PPI, .os.shell+
     PPI, 0
     @QOS @kernel.spawn
-
 ; terminate login process
     @QOS @kernel.terminate
 
@@ -45,9 +70,17 @@
     PRT zer, @port.terminal_request
     BRH #zero, .accept_input
     RST @key
-    SUB @enter_key
-    BRH #zero, .return
-; append to memory
+; return key, submit
+    IMM acc, 0x0A
+    SUB @key
+    BRH #zero, .terminator
+; escape key, retry username
+    IMM acc, 0x1B
+    SUB @key
+    BRH #!zero, .memory_append
+    CPL
+    @GOTO escape
+.memory_append:
     AST @key
     MST @insertion_pointer, 0x00
     INC @insertion_pointer
@@ -57,12 +90,20 @@
     AST @key
     PRT zer, @port.terminal_push
     @GOTO accept_input
-.return:
+.&terminator:
+    CLR
+    MST @insertion_pointer, 0x00
     @RETURN
 
 .&login_string:
     $login, 0x20, $>
     0x00
+.&retry_passwd_string:
+    $retry, 0x20
 .&passwd_string:
     $password, 0x20, $>
+    0x00
+
+.&passwd_preview_string:
+    $testing
     0x00
