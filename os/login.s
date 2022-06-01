@@ -14,6 +14,8 @@
 
 @DECLARE username_loc 0xA0
 @DECLARE passwd_loc 0xB0
+@DECLARE return_key 0x0A
+@DECLARE escape_key 0x1B
 
 ; login username
 .&escape:
@@ -71,11 +73,11 @@
     BRH #zero, .accept_input
     RST @key
 ; return key, submit
-    IMM acc, 0x0A
+    IMM acc, @return_key
     SUB @key
     BRH #zero, .terminator
 ; escape key, retry username
-    IMM acc, 0x1B
+    IMM acc, @escape_key
     SUB @key
     BRH #!zero, .memory_append
     CPL
