@@ -37,28 +37,25 @@
 ; use strcmp kernel subroutine with stack as argument.
     IMM @target_passwd_string, .passwd_preview_string
     IMM @input_passwd_string, @passwd_loc
-.compare_char:
+.&compare_char:
     MLI @target_passwd_string, 0x00
     RST @target_char
     MLI @input_passwd_string, 0x00
-; if equal
-    SUB @target_char
-    BRH #!zero, .retry_passwd
-; if string terminator
-    PRT zer, @port.terminal_push
-    AST @target_char
-    BRH #zero, .spawn_shell
-.&retry_passwd:
-    IMM @string_iterator, .retry_passwd_string
-    @GOTO retry
+    ; if equal
+        SUB @target_char
+        BRH #!zero, .retry_passwd
+    ; if string terminator
+        AST @target_char
+        BRH #!zero, .compare_char
 
-.spawn_shell:
+; spawn shell
     PRT zer, @port.terminal_newline
     PPI, .os.shell+
     PPI, 0
     @QOS @kernel.spawn
-; terminate login process
-    @QOS @kernel.terminate
+.&retry_passwd:
+    IMM @string_iterator, .retry_passwd_string
+    @GOTO retry
 
 .&print_char:
     MLD @string_iterator, 0
@@ -107,5 +104,5 @@
     0x00
 
 .&passwd_preview_string:
-    $testing
+    $test
     0x00
