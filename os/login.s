@@ -71,16 +71,16 @@
     PRT zer, @port.terminal_request
     BRH #zero, .accept_input
     RST @key
-; return key, submit
-    IMM acc, @return_key
-    SUB @key
-    BRH #zero, .terminator
-; escape key, retry username
-    IMM acc, @escape_key
-    SUB @key
-    BRH #!zero, .memory_append
-    CPL
-    @GOTO escape
+    ; return key, submit
+        IMM acc, @return_key
+        SUB @key
+        BRH #zero, .terminator
+    ; escape key, retry username
+        IMM acc, @escape_key
+        SUB @key
+        BRH #!zero, .memory_append
+        CPL
+        @GOTO escape
 .memory_append:
     AST @key
     MST @insertion_pointer, 0x00
