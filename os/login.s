@@ -43,9 +43,11 @@
     MLI @input_passwd_string, 0x00
     ; if equal
         SUB @target_char
+        @DEBUG
         BRH #!zero, .retry_passwd
     ; if string terminator
         AST @target_char
+        @DEBUG
         BRH #!zero, .compare_char
 
 ; spawn shell
