@@ -15,7 +15,7 @@
     RST @location
 .print_loop:
     MLI @location, 0
-    PRT zer, @port.io
+    PRT zer, @port.integer
     BRH #!zero, .print_loop
 ; return
     @QOS @kernel.return
