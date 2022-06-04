@@ -48,7 +48,7 @@
 ; continue if elements ahead
     SUB @shift_destination_pointer
     BRH #!zero, .find_target_iteration
-    JMP zer, .insert_frame
+    @GOTO insert_frame
 
 .&shift_frame_iteration:
     MLD @shift_pointer, 0x00
@@ -71,7 +71,7 @@
     AST @shift_pointer
     SUB @stride_constant
     RST @shift_pointer
-    JMP zer, .shift_frame_iteration
+    @GOTO shift_frame_iteration
 
 .&insert_frame:
     CPL
