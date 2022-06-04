@@ -1,5 +1,5 @@
 @HEADER DEBUG
 
 @IF debug
-    PRT zer, 0x00
+    PRT zer, @port.integer
 @END

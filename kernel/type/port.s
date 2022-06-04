@@ -1,5 +1,5 @@
 @ENUM port
-    @DECLARE io 0
+    @DECLARE integer 0
 
     @DECLARE terminal_newline 1
     @DECLARE terminal_push 2
