@@ -1,12 +1,16 @@
 
 # QOS
 
-> A single-core, multi-context operating system with a monolithic kernel.
+> A single-core, multi-threaded operating system with a monolithic kernel.
 
-## Build
+**Specification**
+> QCPU
+> Iteration `2`
+> Version `C (Improved)`
+
+**Build**
 
 See the [QCPU CLI](https://github.com/QSmally/QCPU-CLI) for building and emulating QOS.
 
 **Assemble flags**
-* `--debug` - prints additional debug information during runtime;
-* `--performance-unsafe` - removes tests to reduce the codebase and increase performance.
+* `--debug` - prints additional debug information during runtime.
