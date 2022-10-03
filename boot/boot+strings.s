@@ -1,0 +1,3 @@
+.qos_string:
+    "QOS", 0x0A
+    0x00
