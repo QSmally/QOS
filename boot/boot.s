@@ -3,16 +3,15 @@
 
 #INCLUDE boot+strings
 
-#DECLARE string_iterator 1
+#DECLARE string_reference 5
 
-; main
-    IMM @string_iterator, .qos_string
+    IMM @string_reference, .qos_string
 .load_char:
-    MLD 1 @string_iterator, 0x00
+    MLD(I) @string_reference, 0x00
     PRT zer, @physical_out.tty
     BRH #!zero, .load_char
 ; start os
     IMM acc, os.login+
     DMA @dmac.execution_context
     DMA @dmac.k_off
-    JMP 0 zer, os.login
+    JMP zer, os.login

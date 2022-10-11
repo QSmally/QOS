@@ -1,0 +1,2 @@
+#SEGMENT 6
+#ADDRESSABLE os.shell
