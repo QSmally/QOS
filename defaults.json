@@ -1,3 +1,4 @@
 {
-    "kernel": ".kernel.entry"
+    "syscall": ".kernel.syscall_entry",
+    "interrupt": ".kernel.interrupt"
 }
