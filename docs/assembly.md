@@ -10,7 +10,7 @@
 * `#SEGMENT <uint>` - defines the starting point of a segment,
 * `#ADDRESSABLE <string>` - label namespace,
 * `#HEADER <string>(...)` - defines a group of preprocessed instructions,
-* `#ENUMERATION <string>` - defines a group of declared key/value pairs,
+* `#ENUM <string>` and `#STRUCT <string>` - defines a group of declared key/value pairs,
 * `#INCLUDE <file>` - includes a file and appends it to this segment (in order),
 * `#ASSOCIATED <file>` - associated segment (continuous addressing used with memory mapping),
 * `#DECLARE <key> <value>` - file-local preprocessed value.
