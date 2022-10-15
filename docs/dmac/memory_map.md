@@ -39,8 +39,7 @@
 Parameters (push order):
 * file inode;
 * range start (block address);
-* range end (block address);
-* connected register.
+* range end (block address).
 
 Tuple return (pull order):
 * base address.
@@ -50,23 +49,22 @@ Implementation example:
 PPS @inode                ; xxxxxxxx
 PPS @start_range          ; 0.yyyy.zzz
 PPS @end_range            ; 0.yyyy.zzz
-PPI, @register
 ENT @syscalls.memory_map
 PPL
-ADD @register             ; offset from begin of virtual block
-RST @register
+ADD @address              ; offset from begin of virtual block
+RST @address
 ```
 
 **System call: `memory_unmap`**
 
 Parameters (push order):
-* connected register.
+* address in specified range.
 
 Tuple return (pull order);
 * void.
 
 Implementation example:
 ```s
-PPI, @register
+PPI, @address
 ENT @syscalls.memory_unmap
 ```
