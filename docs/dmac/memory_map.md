@@ -11,6 +11,7 @@
 * `b`: physical upper address;
 * `c`: section address;
 * `d`: byte-specific virtual address;
+* `e`: heap bit.
 
 **Virtual space: physical mapping**
 
@@ -23,7 +24,7 @@
 |       | |       | |       | |       | |       | |       | |       | |       |
 | - - - | | - - - | | - - - | | - - - | | - - - | | - - - | | - - - | | - - - |
                                                                 | Block address
-                                          (3*32) ------------- /  range (0.aaaa.ccc) - (0.aaaa.ccc)
+                                          (3*32) ------------- /  range (e.aaaa.ccc) - (0.aaaa.ccc)
                                             |
  per-process virtual context      / 101 ----^---- 111 \
 | - - | - - | | - - | - - | | - - | - - | | - - | - - |
@@ -34,7 +35,7 @@
 
 ### System call
 
-**System call: `memory_map_range`**
+**System call: `memory_map`**
 
 Parameters (push order):
 * file inode;
@@ -46,9 +47,9 @@ Tuple return (pull order):
 
 Implementation example:
 ```s
-PPS @inode                ; xxxxxxxx
-PPS @start_range          ; 0.yyyy.zzz
-PPS @end_range            ; 0.yyyy.zzz
+PPS @inode                ; aaaaaaaa?
+PPS @start_range          ; b.cccc.ddd
+PPS @end_range            ; 0.eeeeeee
 ENT @syscalls.memory_map
 PPL
 ADD @address              ; offset from begin of virtual block

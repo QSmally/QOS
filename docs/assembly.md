@@ -9,6 +9,7 @@
 
 * `#SEGMENT <uint>` - defines the starting point of a segment,
 * `#ADDRESSABLE <string>` - label namespace,
+* `#SECTION <string>` - moves the underlying block starting at a new section, labeled,
 * `#HEADER <string>(...)` - defines a group of preprocessed instructions,
 * `#ENUM <string>` and `#STRUCT <string>` - defines a group of declared key/value pairs,
 * `#INCLUDE <file>` - includes a file and appends it to this segment (in order),
