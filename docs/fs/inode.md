@@ -7,16 +7,23 @@
 
 ```
 | - - - - - - - |   | - -
-| 8:  config    | - | 000: (1) lock, (3) flags, (4) type
+| 8:  config    | - | 000: (4) flags, (4) type
 | - - - - - - - |   | 001: (8) parent directory
 | 8:  name str  |   | 010: (?) permissions
-| - - - - - - - |   | 011: (?) user
+| - - - - - - - |   | 011: type-defined
 | 16: type-     |   | 100: type-defined
 |     defined   |   | 101: type-defined
 | - - - - - - - |   | 110: type-defined
                     | 111: type-defined
                     | - -
 ```
+
+**Structures: flags**
+
+* `0b0001`: atomic;
+* `0b0010`: lock;
+* `0b0100`: ?;
+* `0b1000`: ?.
 
 **Structure: type**
 
@@ -26,9 +33,8 @@
 * Link (`0b01#`)
     - `010`: directory;
     - `011`: symbolic.
-* Dynamic content (`0b10#`)
-    - `100`: device;
-    - `101`: publisher? implement publisher driver.
-* Undefined (`0b11#`)
-    - `1100`: ?;
-    - `1101`: ?.
+* Dynamic content (`0b1##`)
+    - `100`: publisher;
+    - `101`: device;
+    - `110`: ?;
+    - `111`: ?.
