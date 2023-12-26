@@ -1,0 +1,2 @@
+
+@define exit 0

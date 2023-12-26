@@ -1,6 +1,13 @@
 
-# Environment
+.git
+
+# System
 .DS_Store
 
-# Development
-build/
+# File editor
+Session.vim
+*.swp
+
+# Zig
+zig-out
+zig-cache

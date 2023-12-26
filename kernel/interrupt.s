@@ -1,1 +1,0 @@
-#ADDRESSABLE kernel.interrupt
